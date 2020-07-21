@@ -1,5 +1,6 @@
 package tech.swapy.abstract_service.base;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.GeneratedValue;
@@ -7,57 +8,59 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
-public class BaseModel {
-	   
-		@Id
-		@GeneratedValue(strategy=GenerationType.AUTO)
-		private Long id;
-		private LocalDateTime createdAt;
-	    private LocalDateTime updatedAt;
+@MappedSuperclass
+public class BaseModel implements Serializable {
 
-	    public BaseModel() {
-	        this.setCreatedAt(LocalDateTime.now());
-	        this.setUpdatedAt(LocalDateTime.now());
-	    }
-	    
-		public Long getId() {
-			return id;
-		}
+	private static final long serialVersionUID = 4807875741017925970L;
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
+	private LocalDateTime createdAt;
+	private LocalDateTime updatedAt;
 
-		public void setId(Long id) {
-			this.id = id;
-		}
-		
-		public LocalDateTime getCreatedAt() {
-			return createdAt;
-		}
+	public BaseModel() {
+		this.setCreatedAt(LocalDateTime.now());
+		this.setUpdatedAt(LocalDateTime.now());
+	}
 
-		private void setCreatedAt(LocalDateTime createdAt) {
-			this.createdAt = createdAt;
-		}
+	public Long getId() {
+		return id;
+	}
 
-		public LocalDateTime getUpdatedAt() {
-			return updatedAt;
-		}
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-		public void setUpdatedAt(LocalDateTime updatedAt) {
-			this.updatedAt = updatedAt;
-		}
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
 
-		@Override
-		public boolean equals(Object obj) {
-			if (this == obj) {
-				return true;
-			}
-			if (this.id == null || obj == null || !(this.getClass().equals(obj.getClass()))) {
-				return false;
-			}
-			BaseModel that = (BaseModel) obj;
-			return this.id.equals(that.getId());
-		}
+	private void setCreatedAt(LocalDateTime createdAt) {
+		this.createdAt = createdAt;
+	}
 
-		@Override
-		public int hashCode() {
-			return id == null ? 0 : id.hashCode();
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
+
+	public void setUpdatedAt(LocalDateTime updatedAt) {
+		this.updatedAt = updatedAt;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
 		}
+		if (this.id == null || obj == null || !(this.getClass().equals(obj.getClass()))) {
+			return false;
+		}
+		BaseModel that = (BaseModel) obj;
+		return this.id.equals(that.getId());
+	}
+
+	@Override
+	public int hashCode() {
+		return id == null ? 0 : id.hashCode();
+	}
 }
