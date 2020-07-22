@@ -17,27 +17,27 @@ public class BaseRestController<T extends BaseModel, ID extends Serializable> {
 	@Autowired
 	BaseService<T, ID> baseService;
 
-	@GetMapping()
+	@GetMapping
 	public List<T> findAll() {
 		return baseService.findAll();
 	}
 
-	@PostMapping()
+	@PostMapping
 	  public T save(@RequestBody T base) {
 	    return baseService.save(base);
 	  }
 
-	@GetMapping()
+	@GetMapping
 	public Optional<T> findById(@PathVariable ID id) {
 		return baseService.findById(id);
 	}
 
-	@PutMapping()
+	@PutMapping
 	public T update(@RequestBody T base) {
 		return baseService.save(base);
 	}
 	
-	@DeleteMapping()
+	@DeleteMapping
 	void deleteEmployee(@PathVariable ID id) {
 		baseService.deleteById(id);
 	}
