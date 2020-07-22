@@ -37,7 +37,7 @@ public class BaseRestController<T extends BaseModel, ID extends Serializable> {
 		return baseService.save(base);
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("{id}")
 	void deleteEmployee(@PathVariable ID id) {
 		baseService.deleteById(id);
 	}
