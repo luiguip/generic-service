@@ -27,7 +27,7 @@ public class BaseRestController<T extends BaseModel, ID extends Serializable> {
 	    return baseService.save(base);
 	  }
 
-	@GetMapping
+	@GetMapping("{id}")
 	public Optional<T> findById(@PathVariable ID id) {
 		return baseService.findById(id);
 	}
