@@ -63,7 +63,17 @@ public class BaseModel implements Serializable {
 
 	@Override
 	public int hashCode() {
-		return id == null ? 0 : id.hashCode();
+		final int PRIME = 59;
+		int result = this.calculateHashCodeResult(PRIME);
+		return result;
+	}
+
+	private int calculateHashCodeResult(final int PRIME) {
+		int result = 1;
+	    result = PRIME* result + ((this.getId() == null) ? 0 : this.getId().hashCode());
+	    result = PRIME* result + ((this.getCreatedAt() == null) ? 0 : this.getCreatedAt().hashCode());
+	    result = PRIME* result + ((this.getUpdatedAt() == null) ? 0 : this.getUpdatedAt().hashCode());
+	    return result;
 	}
 
 	private boolean isMinimumRequirementsSatisfied(Object object) {
