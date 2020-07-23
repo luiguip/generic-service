@@ -54,19 +54,56 @@ public class BaseModel implements Serializable {
 	}
 
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj) {
-			return true;
-		}
-		if (this.id == null || obj == null || !(this.getClass().equals(obj.getClass()))) {
+	public boolean equals(Object object) {
+		if (!isMinimumRequirementsSatisfied(object)) {
 			return false;
 		}
-		BaseModel that = (BaseModel) obj;
-		return this.id.equals(that.getId());
+		return this.isSameObject(object);
 	}
 
 	@Override
 	public int hashCode() {
 		return id == null ? 0 : id.hashCode();
+	}
+
+	private boolean isMinimumRequirementsSatisfied(Object object) {
+		return isIdNotNull() && isObjectNotNull(object) && isSameClass(object);
+	}
+
+	private boolean isObjectNotNull(Object object) {
+		return object != null;
+	}
+
+	private boolean isIdNotNull() {
+		return this.getId() != null;
+	}
+
+	private boolean isSameClass(Object object) {
+		return this.getClass().equals(object.getClass());
+	}
+
+	private boolean isSameObject(Object object) {
+		BaseModel that = (BaseModel) object;
+		if(this == that) {
+			return true;
+		} else {
+			return this.areSameFields(that);
+		}
+	}
+
+	private boolean areSameFields(BaseModel that) {
+		return isSameId(that) && isSameCreatedAt(that) && isSameUpdatedAt(that);
+	}
+
+	private boolean isSameId(BaseModel that) {
+		return this.getId().equals(that.getId());
+	}
+
+	private boolean isSameCreatedAt(BaseModel that) {
+		return this.getCreatedAt().equals(that.getUpdatedAt());
+	}
+
+	private boolean isSameUpdatedAt(BaseModel that) {
+		return this.getUpdatedAt().equals(that.getUpdatedAt());
 	}
 }
