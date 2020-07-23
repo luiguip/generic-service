@@ -1,10 +1,20 @@
 package tech.swapy.abstract_service.base;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.Test;
 
 public class BaseModelTests {
+
+	@Test
+	public void equalsMinimumRequirements() {
+		BaseModel baseModel = new BaseModel();
+		assertFalse(baseModel.equals(new String()));
+		assertFalse(baseModel.equals(null));
+		baseModel.setId(null);
+		assertFalse(baseModel.equals(baseModel));
+	}
 
 	@Test
 	public void equals() {
