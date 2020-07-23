@@ -11,6 +11,7 @@ public class BaseModelTests {
 		BaseModel baseModelX = this.createBaseModel();
 
 		reflexivity(baseModelX);
+		falseOnNull(baseModelX);
 	}
 
 	public BaseModel createBaseModel() {
@@ -21,5 +22,9 @@ public class BaseModelTests {
 
 	public void reflexivity(BaseModel baseModel) {
 		assertTrue(baseModel.equals(baseModel));
+	}
+
+	public void falseOnNull(BaseModel baseModel) {
+		assertTrue(!baseModel.equals(null));
 	}
 }
