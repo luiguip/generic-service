@@ -13,6 +13,7 @@ public class BaseModelTests {
 
 		reflexivity(baseModelX);
 		symmetricity(baseModelX, baseModelY);
+		consistency(baseModelX, baseModelY);
 		falseOnNull(baseModelX);
 	}
 
@@ -35,6 +36,10 @@ public class BaseModelTests {
 	public void symmetricity(BaseModel baseModelX, BaseModel baseModelY) {
 		assertTrue(baseModelX.equals(baseModelY));
 		assertTrue(baseModelY.equals(baseModelX));
+	}
+
+	public void consistency(BaseModel baseModelX, BaseModel baseModelY) {
+		assertTrue(baseModelX.equals(baseModelY));
 	}
 
 	public void falseOnNull(BaseModel baseModel) {
