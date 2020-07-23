@@ -23,6 +23,12 @@ public class BaseModel implements Serializable {
 		this.setUpdatedAt(LocalDateTime.now());
 	}
 
+	public BaseModel(BaseModel baseModel) {
+		this.setId(baseModel.getId());
+		this.setCreatedAt(baseModel.getCreatedAt());
+		this.setUpdatedAt(LocalDateTime.now());
+	}
+
 	public Long getId() {
 		return id;
 	}
