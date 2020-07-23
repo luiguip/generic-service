@@ -10,9 +10,11 @@ public class BaseModelTests {
 	public void equals() {
 		BaseModel baseModelX = this.createBaseModel();
 		BaseModel baseModelY = this.cloneBaseModel(baseModelX);
+		BaseModel baseModelZ = this.cloneBaseModel(baseModelY);
 
 		reflexivity(baseModelX);
 		symmetricity(baseModelX, baseModelY);
+		transitivity(baseModelX, baseModelY, baseModelZ);
 		consistency(baseModelX, baseModelY);
 		falseOnNull(baseModelX);
 	}
@@ -36,6 +38,12 @@ public class BaseModelTests {
 	public void symmetricity(BaseModel baseModelX, BaseModel baseModelY) {
 		assertTrue(baseModelX.equals(baseModelY));
 		assertTrue(baseModelY.equals(baseModelX));
+	}
+
+	public void transitivity(BaseModel baseModelX, BaseModel baseModelY, BaseModel baseModelZ) {
+		assertTrue(baseModelX.equals(baseModelY));
+		assertTrue(baseModelY.equals(baseModelZ));
+		assertTrue(baseModelX.equals(baseModelZ));
 	}
 
 	public void consistency(BaseModel baseModelX, BaseModel baseModelY) {
