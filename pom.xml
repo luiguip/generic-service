@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>tech.swapy</groupId>
 	<artifactId>abstract-service</artifactId>
-	<version>0.1.0.RELEASE</version>
+	<version>0.1.1.SNAPSHOT</version>
 	<name>abstract-service</name>
 	<description>abstract service </description>
 
