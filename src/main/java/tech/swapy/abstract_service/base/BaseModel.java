@@ -41,7 +41,7 @@ public class BaseModel implements Serializable {
 		return createdAt;
 	}
 
-	private void setCreatedAt(LocalDateTime createdAt) {
+	public void setCreatedAt(LocalDateTime createdAt) {
 		this.createdAt = createdAt;
 	}
 
