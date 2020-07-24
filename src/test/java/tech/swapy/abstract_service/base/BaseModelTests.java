@@ -14,7 +14,7 @@ public class BaseModelTests {
 	BaseModel baseModelX;
 	BaseModel baseModelY;
 	BaseModel baseModelZ;
-	
+
 	@BeforeEach
 	public void init() {
 		this.baseModelX = this.createBaseModel();
