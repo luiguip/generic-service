@@ -28,6 +28,14 @@ public class BaseModelTests {
 	}
 
 	@Test
+	public void differentCreatedAt() {
+		BaseModel baseModel = new BaseModel();
+		baseModel.setId(this.baseModelX.getId());
+		baseModel.setUpdatedAt(this.baseModelX.getUpdatedAt());
+		assertFalse(baseModel.equals(this.baseModelX));
+	}
+
+	@Test
 	public void reflexivity() {
 		assertTrue(this.baseModelX.equals(this.baseModelX));
 	}
