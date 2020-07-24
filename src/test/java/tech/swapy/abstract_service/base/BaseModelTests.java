@@ -23,9 +23,7 @@ public class BaseModelTests {
 	@Test
 	public void equals() {
 		BaseModel baseModelX = this.createBaseModel();
-		BaseModel baseModelY = this.cloneBaseModel(baseModelX);
 
-		consistency(baseModelX, baseModelY);
 		falseOnNull(baseModelX);
 	}
 
@@ -59,8 +57,9 @@ public class BaseModelTests {
 		assertTrue(this.baseModelX.equals(this.baseModelZ));
 	}
 
-	public void consistency(BaseModel baseModelX, BaseModel baseModelY) {
-		assertTrue(baseModelX.equals(baseModelY));
+	@Test
+	public void consistency() {
+		assertTrue(this.baseModelX.equals(this.baseModelY));
 	}
 
 	public void falseOnNull(BaseModel baseModel) {
