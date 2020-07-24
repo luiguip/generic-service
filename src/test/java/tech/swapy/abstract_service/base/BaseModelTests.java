@@ -49,6 +49,7 @@ public class BaseModelTests {
 	@Test
 	public void differentUpdatedAt() {
 		BaseModel baseModel = new BaseModel(baseModelX);
+		baseModel.setUpdatedAt(LocalDateTime.now().plusSeconds(1));
 		assertFalse(baseModel.equals(this.baseModelX));
 	}
 
