@@ -21,6 +21,13 @@ public class BaseModelTests {
 	}
 
 	@Test
+	public void differentIds() {
+		BaseModel baseModel = this.cloneBaseModel(this.baseModelX);
+		baseModel.setId(baseModel.getId() + 1);
+		assertFalse(baseModel.equals(this.baseModelX));
+	}
+
+	@Test
 	public void reflexivity() {
 		assertTrue(this.baseModelX.equals(this.baseModelX));
 	}
