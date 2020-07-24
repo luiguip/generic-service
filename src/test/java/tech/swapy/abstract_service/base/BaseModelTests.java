@@ -4,14 +4,22 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class BaseModelTests {
 
-	BaseModel baseModelX = this.createBaseModel();
-	BaseModel baseModelY = this.cloneBaseModel(baseModelX);
-	BaseModel baseModelZ = this.cloneBaseModel(baseModelY);
+	BaseModel baseModelX;
+	BaseModel baseModelY;
+	BaseModel baseModelZ;
 	
+	@BeforeEach
+	public void init() {
+		this.baseModelX = this.createBaseModel();
+		this.baseModelY = this.cloneBaseModel(baseModelX);
+		this.baseModelZ = this.cloneBaseModel(baseModelY);
+	}
+
 	@Test
 	public void equalsMinimumRequirements() {
 		BaseModel baseModel = new BaseModel();
