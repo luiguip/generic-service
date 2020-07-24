@@ -36,6 +36,12 @@ public class BaseModelTests {
 	}
 
 	@Test
+	public void differentUpdatedAt() {
+		BaseModel baseModel = new BaseModel(baseModelX);
+		assertFalse(baseModel.equals(this.baseModelX));
+	}
+
+	@Test
 	public void reflexivity() {
 		assertTrue(this.baseModelX.equals(this.baseModelX));
 	}
