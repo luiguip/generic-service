@@ -9,6 +9,7 @@ public class BaseModelTests {
 
 	BaseModel baseModelX = this.createBaseModel();
 	BaseModel baseModelY = this.cloneBaseModel(baseModelX);
+	BaseModel baseModelZ = this.cloneBaseModel(baseModelY);
 	
 	@Test
 	public void equalsMinimumRequirements() {
@@ -23,9 +24,7 @@ public class BaseModelTests {
 	public void equals() {
 		BaseModel baseModelX = this.createBaseModel();
 		BaseModel baseModelY = this.cloneBaseModel(baseModelX);
-		BaseModel baseModelZ = this.cloneBaseModel(baseModelY);
 
-		transitivity(baseModelX, baseModelY, baseModelZ);
 		consistency(baseModelX, baseModelY);
 		falseOnNull(baseModelX);
 	}
@@ -53,10 +52,11 @@ public class BaseModelTests {
 		assertTrue(this.baseModelY.equals(this.baseModelX));
 	}
 
-	public void transitivity(BaseModel baseModelX, BaseModel baseModelY, BaseModel baseModelZ) {
-		assertTrue(baseModelX.equals(baseModelY));
-		assertTrue(baseModelY.equals(baseModelZ));
-		assertTrue(baseModelX.equals(baseModelZ));
+	@Test
+	public void transitivity() {
+		assertTrue(this.baseModelX.equals(this.baseModelY));
+		assertTrue(this.baseModelY.equals(this.baseModelZ));
+		assertTrue(this.baseModelX.equals(this.baseModelZ));
 	}
 
 	public void consistency(BaseModel baseModelX, BaseModel baseModelY) {
