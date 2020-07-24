@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 public class BaseModelTests {
 
 	BaseModel baseModelX = this.createBaseModel();
+	BaseModel baseModelY = this.cloneBaseModel(baseModelX);
 	
 	@Test
 	public void equalsMinimumRequirements() {
@@ -24,7 +25,6 @@ public class BaseModelTests {
 		BaseModel baseModelY = this.cloneBaseModel(baseModelX);
 		BaseModel baseModelZ = this.cloneBaseModel(baseModelY);
 
-		symmetricity(baseModelX, baseModelY);
 		transitivity(baseModelX, baseModelY, baseModelZ);
 		consistency(baseModelX, baseModelY);
 		falseOnNull(baseModelX);
@@ -47,9 +47,10 @@ public class BaseModelTests {
 		assertTrue(this.baseModelX.equals(this.baseModelX));
 	}
 
-	public void symmetricity(BaseModel baseModelX, BaseModel baseModelY) {
-		assertTrue(baseModelX.equals(baseModelY));
-		assertTrue(baseModelY.equals(baseModelX));
+	@Test
+	public void symmetricity() {
+		assertTrue(this.baseModelX.equals(this.baseModelY));
+		assertTrue(this.baseModelY.equals(this.baseModelX));
 	}
 
 	public void transitivity(BaseModel baseModelX, BaseModel baseModelY, BaseModel baseModelZ) {
