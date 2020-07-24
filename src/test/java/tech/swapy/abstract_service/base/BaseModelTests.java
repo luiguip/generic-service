@@ -20,18 +20,6 @@ public class BaseModelTests {
 		assertFalse(baseModel.equals(baseModel));
 	}
 
-	public BaseModel createBaseModel() {
-		BaseModel baseModel = new BaseModel();
-		baseModel.setId(1L);
-		return baseModel;
-	}
-
-	public BaseModel cloneBaseModel(BaseModel baseModel) {
-		BaseModel baseModelClone = new BaseModel(baseModel);
-		baseModelClone.setUpdatedAt(baseModel.getUpdatedAt());
-		return baseModelClone;
-	}
-
 	@Test
 	public void reflexivity() {
 		assertTrue(this.baseModelX.equals(this.baseModelX));
@@ -59,4 +47,18 @@ public class BaseModelTests {
 	public void falseOnNull() {
 		assertFalse(this.baseModelX.equals(null));
 	}
+	
+
+	public BaseModel createBaseModel() {
+		BaseModel baseModel = new BaseModel();
+		baseModel.setId(1L);
+		return baseModel;
+	}
+
+	public BaseModel cloneBaseModel(BaseModel baseModel) {
+		BaseModel baseModelClone = new BaseModel(baseModel);
+		baseModelClone.setUpdatedAt(baseModel.getUpdatedAt());
+		return baseModelClone;
+	}
+
 }
