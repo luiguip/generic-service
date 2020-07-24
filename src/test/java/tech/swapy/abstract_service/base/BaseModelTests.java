@@ -1,5 +1,6 @@
 package tech.swapy.abstract_service.base;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -68,18 +69,21 @@ public class BaseModelTests {
 	public void falseOnNull() {
 		assertFalse(this.baseModelX.equals(null));
 	}
-	
 
-	public BaseModel createBaseModel() {
+	@Test
+	public void hashCodeEquity() {
+		assertEquals(this.baseModelX.hashCode(), this.baseModelZ.hashCode());
+	}
+
+	private BaseModel createBaseModel() {
 		BaseModel baseModel = new BaseModel();
 		baseModel.setId(1L);
 		return baseModel;
 	}
 
-	public BaseModel cloneBaseModel(BaseModel baseModel) {
+	private BaseModel cloneBaseModel(BaseModel baseModel) {
 		BaseModel baseModelClone = new BaseModel(baseModel);
 		baseModelClone.setUpdatedAt(baseModel.getUpdatedAt());
 		return baseModelClone;
 	}
-
 }
