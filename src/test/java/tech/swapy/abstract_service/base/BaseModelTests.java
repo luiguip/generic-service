@@ -20,13 +20,6 @@ public class BaseModelTests {
 		assertFalse(baseModel.equals(baseModel));
 	}
 
-	@Test
-	public void equals() {
-		BaseModel baseModelX = this.createBaseModel();
-
-		falseOnNull(baseModelX);
-	}
-
 	public BaseModel createBaseModel() {
 		BaseModel baseModel = new BaseModel();
 		baseModel.setId(1L);
@@ -62,7 +55,8 @@ public class BaseModelTests {
 		assertTrue(this.baseModelX.equals(this.baseModelY));
 	}
 
-	public void falseOnNull(BaseModel baseModel) {
-		assertTrue(!baseModel.equals(null));
+	@Test
+	public void falseOnNull() {
+		assertFalse(this.baseModelX.equals(null));
 	}
 }
