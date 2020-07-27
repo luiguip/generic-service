@@ -39,10 +39,9 @@ class BaseModelTests {
 	}
 
 	@Test
-	void differentIds() {
-		BaseModel baseModel = this.cloneBaseModel(this.baseModelX);
-		baseModel.setId(baseModel.getId() + 1);
-		assertFalse(baseModel.equals(this.baseModelX));
+	void shouldEqualsBeFalseWithDifferentIds() {
+		baseModelY.setId(baseModelX.getId() + 1);
+		assertFalse(baseModelY.equals(baseModelX));
 	}
 
 	@Test
