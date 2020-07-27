@@ -2,11 +2,15 @@ package tech.swapy.abstract_service.base;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
+
+import tech.swapy.utils.model.HashCodeCalculator;
 
 @MappedSuperclass
 public class BaseModel implements Serializable {
@@ -54,6 +58,12 @@ public class BaseModel implements Serializable {
 	}
 
 	@Override
+	public int hashCode() {
+		HashCodeCalculator hashCodeCalculator = new HashCodeCalculator(getAllAsObjectList());
+		return hashCodeCalculator.getHashCodeValue();
+	}
+
+	@Override
 	public boolean equals(Object object) {
 		if (!isMinimumRequirementsSatisfied(object)) {
 			return false;
@@ -61,19 +71,8 @@ public class BaseModel implements Serializable {
 		return this.isSameObject(object);
 	}
 
-	@Override
-	public int hashCode() {
-		final int PRIME = 59;
-		int result = this.calculateHashCodeResult(PRIME);
-		return result;
-	}
-
-	private int calculateHashCodeResult(final int PRIME) {
-		int result = 1;
-	    result = PRIME* result + ((this.getId() == null) ? 0 : this.getId().hashCode());
-	    result = PRIME* result + ((this.getCreatedAt() == null) ? 0 : this.getCreatedAt().hashCode());
-	    result = PRIME* result + ((this.getUpdatedAt() == null) ? 0 : this.getUpdatedAt().hashCode());
-	    return result;
+	private List<Object> getAllAsObjectList() {
+		return Arrays.asList(getId(), getCreatedAt(), getUpdatedAt());
 	}
 
 	private boolean isMinimumRequirementsSatisfied(Object object) {
