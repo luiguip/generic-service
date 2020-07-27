@@ -63,9 +63,8 @@ class BaseModelTests {
 	}
 
 	@Test
-	void symmetricity() {
-		assertTrue(this.baseModelX.equals(this.baseModelY));
-		assertTrue(this.baseModelY.equals(this.baseModelX));
+	void shouldBeTrueWithAnotherObjectWithSameFields() {
+		assertTrue(baseModelX.equals(baseModelY));
 	}
 
 	@Test
