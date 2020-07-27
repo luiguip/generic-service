@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class BaseModelTests {
+class BaseModelTests {
 
 	BaseModel baseModelX;
 	BaseModel baseModelY;
@@ -23,7 +23,7 @@ public class BaseModelTests {
 	}
 
 	@Test
-	public void equalsMinimumRequirements() {
+	void equalsMinimumRequirements() {
 		BaseModel baseModel = new BaseModel();
 		assertFalse(baseModel.equals(new String()));
 		assertFalse(baseModel.equals(null));
@@ -32,14 +32,14 @@ public class BaseModelTests {
 	}
 
 	@Test
-	public void differentIds() {
+	void differentIds() {
 		BaseModel baseModel = this.cloneBaseModel(this.baseModelX);
 		baseModel.setId(baseModel.getId() + 1);
 		assertFalse(baseModel.equals(this.baseModelX));
 	}
 
 	@Test
-	public void differentCreatedAt() {
+	void differentCreatedAt() {
 		BaseModel baseModel = new BaseModel(baseModelX);
 		baseModel.setCreatedAt(LocalDateTime.now().plusSeconds(1));
 		baseModel.setUpdatedAt(this.baseModelX.getUpdatedAt());
@@ -47,42 +47,42 @@ public class BaseModelTests {
 	}
 
 	@Test
-	public void differentUpdatedAt() {
+	void differentUpdatedAt() {
 		BaseModel baseModel = new BaseModel(baseModelX);
 		baseModel.setUpdatedAt(LocalDateTime.now().plusSeconds(1));
 		assertFalse(baseModel.equals(this.baseModelX));
 	}
 
 	@Test
-	public void reflexivity() {
+	void reflexivity() {
 		assertTrue(this.baseModelX.equals(this.baseModelX));
 	}
 
 	@Test
-	public void symmetricity() {
+	void symmetricity() {
 		assertTrue(this.baseModelX.equals(this.baseModelY));
 		assertTrue(this.baseModelY.equals(this.baseModelX));
 	}
 
 	@Test
-	public void transitivity() {
+	void transitivity() {
 		assertTrue(this.baseModelX.equals(this.baseModelY));
 		assertTrue(this.baseModelY.equals(this.baseModelZ));
 		assertTrue(this.baseModelX.equals(this.baseModelZ));
 	}
 
 	@Test
-	public void consistency() {
+	void consistency() {
 		assertTrue(this.baseModelX.equals(this.baseModelY));
 	}
 
 	@Test
-	public void falseOnNull() {
+	void falseOnNull() {
 		assertFalse(this.baseModelX.equals(null));
 	}
 
 	@Test
-	public void hashCodeEquity() {
+	void hashCodeEquity() {
 		assertEquals(this.baseModelX.hashCode(), this.baseModelZ.hashCode());
 	}
 
