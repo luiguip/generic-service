@@ -52,10 +52,9 @@ class BaseModelTests {
 	}
 
 	@Test
-	void differentUpdatedAt() {
-		BaseModel baseModel = new BaseModel(baseModelX);
-		baseModel.setUpdatedAt(LocalDateTime.now().plusSeconds(1));
-		assertFalse(baseModel.equals(this.baseModelX));
+	void shouldEqualsBeFalseWithDifferentUpdatedAt() {
+		baseModelY.setUpdatedAt(LocalDateTime.now().plusSeconds(1));
+		assertFalse(baseModelY.equals(baseModelX));
 	}
 
 	@Test
