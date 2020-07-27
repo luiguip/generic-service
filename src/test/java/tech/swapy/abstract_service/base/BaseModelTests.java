@@ -9,81 +9,65 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class BaseModelTests {
+class BaseModelTests {
 
 	BaseModel baseModelX;
 	BaseModel baseModelY;
-	BaseModel baseModelZ;
 
 	@BeforeEach
 	public void init() {
 		this.baseModelX = this.createBaseModel();
 		this.baseModelY = this.cloneBaseModel(baseModelX);
-		this.baseModelZ = this.cloneBaseModel(baseModelY);
 	}
 
 	@Test
-	public void equalsMinimumRequirements() {
-		BaseModel baseModel = new BaseModel();
-		assertFalse(baseModel.equals(new String()));
-		assertFalse(baseModel.equals(null));
-		baseModel.setId(null);
-		assertFalse(baseModel.equals(baseModel));
+	void shouldEqualsBeFalseWithNull() {
+		assertFalse(baseModelX.equals(null));
+	}
+	
+	@Test
+	void shouldEqualsBeFalseWithAnotherObject() {
+		assertFalse(baseModelX.equals(new String()));
 	}
 
 	@Test
-	public void differentIds() {
-		BaseModel baseModel = this.cloneBaseModel(this.baseModelX);
-		baseModel.setId(baseModel.getId() + 1);
-		assertFalse(baseModel.equals(this.baseModelX));
+	void shouldEqualsBeFalseWithNullId() {
+		baseModelX.setId(null);
+		assertFalse(baseModelX.equals(baseModelX));
 	}
 
 	@Test
-	public void differentCreatedAt() {
-		BaseModel baseModel = new BaseModel(baseModelX);
-		baseModel.setCreatedAt(LocalDateTime.now().plusSeconds(1));
-		baseModel.setUpdatedAt(this.baseModelX.getUpdatedAt());
-		assertFalse(baseModel.equals(this.baseModelX));
+	void shouldEqualsBeFalseWithDifferentIds() {
+		baseModelY.setId(baseModelX.getId() + 1);
+		assertFalse(baseModelY.equals(baseModelX));
 	}
 
 	@Test
-	public void differentUpdatedAt() {
-		BaseModel baseModel = new BaseModel(baseModelX);
-		baseModel.setUpdatedAt(LocalDateTime.now().plusSeconds(1));
-		assertFalse(baseModel.equals(this.baseModelX));
+	void shouldEqualsBeFalseWithDifferentCreatedAt() {
+		baseModelY.setCreatedAt(LocalDateTime.now().plusSeconds(1));
+		baseModelY.setUpdatedAt(baseModelX.getUpdatedAt());
+		assertFalse(baseModelY.equals(baseModelX));
 	}
 
 	@Test
-	public void reflexivity() {
-		assertTrue(this.baseModelX.equals(this.baseModelX));
+	void shouldEqualsBeFalseWithDifferentUpdatedAt() {
+		baseModelY.setUpdatedAt(LocalDateTime.now().plusSeconds(1));
+		assertFalse(baseModelY.equals(baseModelX));
 	}
 
 	@Test
-	public void symmetricity() {
-		assertTrue(this.baseModelX.equals(this.baseModelY));
-		assertTrue(this.baseModelY.equals(this.baseModelX));
+	void shouldEqualsBeTrueWithSameObject() {
+		assertTrue(baseModelX.equals(baseModelX));
 	}
 
 	@Test
-	public void transitivity() {
-		assertTrue(this.baseModelX.equals(this.baseModelY));
-		assertTrue(this.baseModelY.equals(this.baseModelZ));
-		assertTrue(this.baseModelX.equals(this.baseModelZ));
+	void shouldBeTrueWithAnotherObjectWithSameFields() {
+		assertTrue(baseModelX.equals(baseModelY));
 	}
 
 	@Test
-	public void consistency() {
-		assertTrue(this.baseModelX.equals(this.baseModelY));
-	}
-
-	@Test
-	public void falseOnNull() {
-		assertFalse(this.baseModelX.equals(null));
-	}
-
-	@Test
-	public void hashCodeEquity() {
-		assertEquals(this.baseModelX.hashCode(), this.baseModelZ.hashCode());
+	void shouldHashCodeBeEqualsWithDifferentObjectsAndSameFields() {
+		assertEquals(baseModelX.hashCode(), baseModelY.hashCode());
 	}
 
 	private BaseModel createBaseModel() {
