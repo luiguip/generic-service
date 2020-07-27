@@ -68,23 +68,6 @@ class BaseModelTests {
 	}
 
 	@Test
-	void transitivity() {
-		assertTrue(this.baseModelX.equals(this.baseModelY));
-		assertTrue(this.baseModelY.equals(this.baseModelZ));
-		assertTrue(this.baseModelX.equals(this.baseModelZ));
-	}
-
-	@Test
-	void consistency() {
-		assertTrue(this.baseModelX.equals(this.baseModelY));
-	}
-
-	@Test
-	void falseOnNull() {
-		assertFalse(this.baseModelX.equals(null));
-	}
-
-	@Test
 	void hashCodeEquity() {
 		assertEquals(this.baseModelX.hashCode(), this.baseModelZ.hashCode());
 	}
