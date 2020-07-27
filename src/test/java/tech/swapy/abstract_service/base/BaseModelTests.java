@@ -58,8 +58,8 @@ class BaseModelTests {
 	}
 
 	@Test
-	void reflexivity() {
-		assertTrue(this.baseModelX.equals(this.baseModelX));
+	void shouldEqualsBeTrueWithSameObject() {
+		assertTrue(baseModelX.equals(baseModelX));
 	}
 
 	@Test
