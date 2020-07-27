@@ -23,12 +23,19 @@ class BaseModelTests {
 	}
 
 	@Test
-	void equalsMinimumRequirements() {
-		BaseModel baseModel = new BaseModel();
-		assertFalse(baseModel.equals(new String()));
-		assertFalse(baseModel.equals(null));
-		baseModel.setId(null);
-		assertFalse(baseModel.equals(baseModel));
+	void shouldEqualsBeFalseWithNull() {
+		assertFalse(baseModelX.equals(null));
+	}
+	
+	@Test
+	void shouldEqualsBeFalseWithAnotherObject() {
+		assertFalse(baseModelX.equals(new String()));
+	}
+
+	@Test
+	void shouldEqualsBeFalseWithNullId() {
+		baseModelX.setId(null);
+		assertFalse(baseModelX.equals(baseModelX));
 	}
 
 	@Test
