@@ -13,13 +13,11 @@ class BaseModelTests {
 
 	BaseModel baseModelX;
 	BaseModel baseModelY;
-	BaseModel baseModelZ;
 
 	@BeforeEach
 	public void init() {
 		this.baseModelX = this.createBaseModel();
 		this.baseModelY = this.cloneBaseModel(baseModelX);
-		this.baseModelZ = this.cloneBaseModel(baseModelY);
 	}
 
 	@Test
@@ -69,7 +67,7 @@ class BaseModelTests {
 
 	@Test
 	void hashCodeEquity() {
-		assertEquals(this.baseModelX.hashCode(), this.baseModelZ.hashCode());
+		assertEquals(baseModelX.hashCode(), baseModelY.hashCode());
 	}
 
 	private BaseModel createBaseModel() {
