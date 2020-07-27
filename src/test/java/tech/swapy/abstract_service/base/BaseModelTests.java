@@ -66,7 +66,7 @@ class BaseModelTests {
 	}
 
 	@Test
-	void hashCodeEquity() {
+	void shouldHashCodeBeEqualsWithDifferentObjectsAndSameFields() {
 		assertEquals(baseModelX.hashCode(), baseModelY.hashCode());
 	}
 
