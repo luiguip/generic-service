@@ -7,6 +7,6 @@ import tech.swapy.abstract_service.base.BaseRestController;
 
 @RestController
 @RequestMapping(value = "/base")
-public class BaseModelRestController extends BaseRestController<BaseModelImpl, Long> {
+public class BaseModelImplRestController extends BaseRestController<BaseModelImpl, Long> {
 
 }

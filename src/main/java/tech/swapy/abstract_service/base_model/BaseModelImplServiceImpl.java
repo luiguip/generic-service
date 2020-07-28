@@ -7,9 +7,9 @@ import tech.swapy.abstract_service.base.BaseRepository;
 import tech.swapy.abstract_service.base.BaseServiceImpl;
 
 @Service
-public class BaseModelServiceImpl extends BaseServiceImpl<BaseModelImpl, Long>{
+public class BaseModelImplServiceImpl extends BaseServiceImpl<BaseModelImpl, Long>{
 
-	public BaseModelServiceImpl(BaseRepository<BaseModelImpl, Long> baseRepository) {
+	public BaseModelImplServiceImpl(BaseRepository<BaseModelImpl, Long> baseRepository) {
 		super(baseRepository);
 	}
 
