@@ -13,7 +13,7 @@ import javax.persistence.MappedSuperclass;
 import tech.swapy.utils.model.HashCodeCalculator;
 
 @MappedSuperclass
-public class BaseModel implements Serializable {
+public abstract class BaseModel implements Serializable {
 
 	private static final long serialVersionUID = 4807875741017925970L;
 	@Id
