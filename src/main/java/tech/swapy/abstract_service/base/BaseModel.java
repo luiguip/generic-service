@@ -13,7 +13,7 @@ import javax.persistence.MappedSuperclass;
 import tech.swapy.utils.model.HashCodeCalculator;
 
 @MappedSuperclass
-public class BaseModel implements Serializable {
+public abstract class BaseModel implements Serializable {
 
 	private static final long serialVersionUID = 4807875741017925970L;
 	@Id
@@ -23,14 +23,17 @@ public class BaseModel implements Serializable {
 	private LocalDateTime updatedAt;
 
 	public BaseModel() {
-		this.setCreatedAt(LocalDateTime.now());
-		this.setUpdatedAt(LocalDateTime.now());
 	}
 
-	public BaseModel(BaseModel baseModel) {
-		this.setId(baseModel.getId());
-		this.setCreatedAt(baseModel.getCreatedAt());
-		this.setUpdatedAt(LocalDateTime.now());
+	public BaseModel(LocalDateTime cratedAt, LocalDateTime updatedAt) {
+		this.createdAt = cratedAt;
+		this.updatedAt = updatedAt;
+	}
+	
+	public BaseModel(Long id, LocalDateTime cratedAt, LocalDateTime updatedAt) {
+		this.id = id;
+		this.createdAt = cratedAt;
+		this.updatedAt = updatedAt;
 	}
 
 	public Long getId() {
