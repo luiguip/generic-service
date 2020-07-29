@@ -1,5 +1,7 @@
 package tech.swapy.abstract_service.base_model;
 
+import java.time.LocalDateTime;
+
 import javax.persistence.Entity;
 
 import tech.swapy.abstract_service.base.BaseModel;
@@ -12,8 +14,12 @@ public class BaseModelImpl extends BaseModel {
 	public BaseModelImpl() {
 		super();
 	}
-	
-	public BaseModelImpl(BaseModelImpl baseModelImpl) {
-		super(baseModelImpl);
+
+	public BaseModelImpl(LocalDateTime cratedAt, LocalDateTime updatedAt) {
+		super(cratedAt, updatedAt);
+	}
+
+	public BaseModelImpl(Long id, LocalDateTime cratedAt, LocalDateTime updatedAt) {
+		super(id, cratedAt, updatedAt);
 	}
 }
