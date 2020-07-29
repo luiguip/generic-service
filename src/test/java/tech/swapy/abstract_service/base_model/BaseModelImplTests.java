@@ -18,8 +18,8 @@ class BaseModelImplTests {
 
 	@BeforeEach
 	void init() {
-		this.baseModelImplX = this.createBaseModelImpl();
-		this.baseModelImplY = this.cloneBaseModelImpl(baseModelImplX);
+		this.baseModelImplX = BaseModelImplTestUtils.createBaseModelImpl();
+		this.baseModelImplY = BaseModelImplTestUtils.cloneBaseModelImpl(baseModelImplX);
 	}
 
 	@Test
@@ -70,17 +70,5 @@ class BaseModelImplTests {
 	@Test
 	void shouldHashCodeBeEqualsWithDifferentObjectsAndSameFields() {
 		assertEquals(baseModelImplX.hashCode(), baseModelImplY.hashCode());
-	}
-
-	private BaseModelImpl createBaseModelImpl() {
-		BaseModelImpl baseModelImpl = new BaseModelImpl();
-		baseModelImpl.setId(1L);
-		return baseModelImpl;
-	}
-
-	private BaseModelImpl cloneBaseModelImpl(BaseModelImpl baseModelImpl) {
-		BaseModelImpl baseModelImplClone = new BaseModelImpl(baseModelImpl);
-		baseModelImplClone.setUpdatedAt(baseModelImpl.getUpdatedAt());
-		return baseModelImplClone;
 	}
 }

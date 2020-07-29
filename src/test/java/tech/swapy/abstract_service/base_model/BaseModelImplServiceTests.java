@@ -17,8 +17,8 @@ import tech.swapy.abstract_service.base.BaseService;
 @SpringBootTest
 class BaseModelImplServiceTests {
 
-	private BaseModelImpl noIdBaseModelImpl;
-	private BaseModelImpl baseModelImpl;
+	private BaseModelImpl baseModelImplX;
+	private BaseModelImpl baseModelImplY;
 	private Optional<BaseModelImpl> optionalBaseModelImpl;
 
 	@Autowired
@@ -29,11 +29,16 @@ class BaseModelImplServiceTests {
 
 	@BeforeEach
 	void init() {
-		baseModelImpl = new BaseModelImpl();
-		baseModelImpl.setId(1L);
-		optionalBaseModelImpl = Optional.of(baseModelImpl);
-		noIdBaseModelImpl = new BaseModelImpl(baseModelImpl);
-		noIdBaseModelImpl.setUpdatedAt(baseModelImpl.getUpdatedAt());
+		baseModelImplX = BaseModelImplTestUtils.createBaseModelImpl();
+		optionalBaseModelImpl = Optional.of(baseModelImplX);
+		baseModelImplY = BaseModelImplTestUtils.cloneBaseModelImpl(baseModelImplX);
+	}
+
+	@Test
+	void shouldSave() {
+		baseModelImplY.setId(null);
+		when(baseModelImplRepository.save(baseModelImplY)).thenReturn(baseModelImplX);
+		assertThat(baseModelImplService.save(baseModelImplY)).isEqualTo(baseModelImplX);
 	}
 
 	@Test
@@ -46,5 +51,10 @@ class BaseModelImplServiceTests {
 	void shouldNotFindById() {
 		when(baseModelImplRepository.findById(1L)).thenReturn(Optional.ofNullable(null));
 		assertThat(baseModelImplService.findById(1L)).isNotPresent();
+	}
+	
+	@Test
+	void shouldUpdate() {
+		
 	}
 }
