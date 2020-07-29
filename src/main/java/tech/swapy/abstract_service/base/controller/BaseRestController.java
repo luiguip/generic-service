@@ -1,4 +1,4 @@
-package tech.swapy.abstract_service.base;
+package tech.swapy.abstract_service.base.controller;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-public abstract class BaseRestController<T extends BaseModel, ID extends Serializable> {
+import tech.swapy.abstract_service.base.domain.BaseService;
+import tech.swapy.abstract_service.base.persistence.BaseEntity;
+
+public abstract class BaseRestController<T extends BaseEntity, ID extends Serializable> {
 
 	@Autowired
 	BaseService<T, ID> baseService;

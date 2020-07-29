@@ -1,4 +1,4 @@
-package tech.swapy.abstract_service.base;
+package tech.swapy.abstract_service.base.domain;
 
 import java.io.Serializable;
 import java.util.List;
@@ -9,9 +9,12 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tech.swapy.abstract_service.base.persistence.BaseEntity;
+import tech.swapy.abstract_service.base.persistence.BaseRepository;
+
 @Service
 @Transactional
-public abstract class BaseServiceImpl<T extends BaseModel, ID extends Serializable> implements BaseService<T, ID> {
+public abstract class BaseServiceImpl<T extends BaseEntity, ID extends Serializable> implements BaseService<T, ID> {
 
 	@Autowired
 	private BaseRepository<T, ID> baseRepository;

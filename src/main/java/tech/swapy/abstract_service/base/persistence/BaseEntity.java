@@ -1,4 +1,4 @@
-package tech.swapy.abstract_service.base;
+package tech.swapy.abstract_service.base.persistence;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -13,7 +13,7 @@ import javax.persistence.MappedSuperclass;
 import tech.swapy.utils.model.HashCodeCalculator;
 
 @MappedSuperclass
-public abstract class BaseModel implements Serializable {
+public abstract class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 4807875741017925970L;
 	@Id
@@ -22,15 +22,15 @@ public abstract class BaseModel implements Serializable {
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 
-	public BaseModel() {
+	public BaseEntity() {
 	}
 
-	public BaseModel(LocalDateTime cratedAt, LocalDateTime updatedAt) {
+	public BaseEntity(LocalDateTime cratedAt, LocalDateTime updatedAt) {
 		this.createdAt = cratedAt;
 		this.updatedAt = updatedAt;
 	}
 	
-	public BaseModel(Long id, LocalDateTime cratedAt, LocalDateTime updatedAt) {
+	public BaseEntity(Long id, LocalDateTime cratedAt, LocalDateTime updatedAt) {
 		this.id = id;
 		this.createdAt = cratedAt;
 		this.updatedAt = updatedAt;
@@ -95,7 +95,7 @@ public abstract class BaseModel implements Serializable {
 	}
 
 	private boolean isSameObject(Object object) {
-		BaseModel that = (BaseModel) object;
+		BaseEntity that = (BaseEntity) object;
 		if(this == that) {
 			return true;
 		} else {
@@ -103,19 +103,19 @@ public abstract class BaseModel implements Serializable {
 		}
 	}
 
-	private boolean areSameFields(BaseModel that) {
+	private boolean areSameFields(BaseEntity that) {
 		return isSameId(that) && isSameCreatedAt(that) && isSameUpdatedAt(that);
 	}
 
-	private boolean isSameId(BaseModel that) {
+	private boolean isSameId(BaseEntity that) {
 		return this.getId().equals(that.getId());
 	}
 
-	private boolean isSameCreatedAt(BaseModel that) {
+	private boolean isSameCreatedAt(BaseEntity that) {
 		return this.getCreatedAt().equals(that.getUpdatedAt());
 	}
 
-	private boolean isSameUpdatedAt(BaseModel that) {
+	private boolean isSameUpdatedAt(BaseEntity that) {
 		return this.getUpdatedAt().equals(that.getUpdatedAt());
 	}
 }
