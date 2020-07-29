@@ -23,9 +23,9 @@ public abstract class BaseRestController<T extends BaseModel, ID extends Seriali
 	}
 
 	@PostMapping
-	  public T save(@RequestBody T base) {
-	    return baseService.save(base);
-	  }
+	public T save(@RequestBody T base) {
+		return baseService.save(base);
+	}
 
 	@GetMapping("{id}")
 	public Optional<T> findById(@PathVariable ID id) {
@@ -36,7 +36,7 @@ public abstract class BaseRestController<T extends BaseModel, ID extends Seriali
 	public T update(@RequestBody T base) {
 		return baseService.save(base);
 	}
-	
+
 	@DeleteMapping("{id}")
 	void deleteEmployee(@PathVariable ID id) {
 		baseService.deleteById(id);
