@@ -1,4 +1,4 @@
-package tech.swapy.abstract_service.base_model;
+package tech.swapy.abstract_service.base_model.persistence;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -10,6 +10,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import tech.swapy.abstract_service.base_model.commons.BaseModelImplTestCommons;
+import tech.swapy.abstract_service.base_model.persistence.BaseModelImpl;
+
 @SpringBootTest
 class BaseModelImplTests {
 
@@ -18,8 +21,8 @@ class BaseModelImplTests {
 
 	@BeforeEach
 	void init() {
-		this.baseModelImplX = BaseModelImplTestUtils.createBaseModelImpl();
-		this.baseModelImplY = BaseModelImplTestUtils.cloneBaseModelImpl(baseModelImplX);
+		this.baseModelImplX = BaseModelImplTestCommons.createBaseModelImpl();
+		this.baseModelImplY = BaseModelImplTestCommons.cloneBaseModelImpl(baseModelImplX);
 	}
 
 	@Test

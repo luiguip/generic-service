@@ -1,4 +1,4 @@
-package tech.swapy.abstract_service.base_model;
+package tech.swapy.abstract_service.base_model.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -15,8 +15,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import tech.swapy.abstract_service.base.BaseRepository;
-import tech.swapy.abstract_service.base.BaseService;
+import tech.swapy.abstract_service.base.domain.BaseService;
+import tech.swapy.abstract_service.base.persistence.BaseRepository;
+import tech.swapy.abstract_service.base_model.commons.BaseModelImplTestCommons;
+import tech.swapy.abstract_service.base_model.persistence.BaseModelImpl;
 
 @SpringBootTest
 class BaseModelImplServiceTests {
@@ -34,9 +36,9 @@ class BaseModelImplServiceTests {
 
 	@BeforeEach
 	void init() {
-		baseModelImplX = BaseModelImplTestUtils.createBaseModelImpl();
+		baseModelImplX = BaseModelImplTestCommons.createBaseModelImpl();
 		optionalBaseModelImpl = Optional.of(baseModelImplX);
-		baseModelImplY = BaseModelImplTestUtils.cloneBaseModelImpl(baseModelImplX);
+		baseModelImplY = BaseModelImplTestCommons.cloneBaseModelImpl(baseModelImplX);
 		baseModelImplList = Arrays.asList(baseModelImplX, baseModelImplY);
 	}
 

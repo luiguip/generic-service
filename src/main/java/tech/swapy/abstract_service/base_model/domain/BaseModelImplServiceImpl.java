@@ -1,9 +1,10 @@
-package tech.swapy.abstract_service.base_model;
+package tech.swapy.abstract_service.base_model.domain;
 
 import org.springframework.stereotype.Service;
 
-import tech.swapy.abstract_service.base.BaseRepository;
-import tech.swapy.abstract_service.base.BaseServiceImpl;
+import tech.swapy.abstract_service.base.domain.BaseServiceImpl;
+import tech.swapy.abstract_service.base.persistence.BaseRepository;
+import tech.swapy.abstract_service.base_model.persistence.BaseModelImpl;
 
 @Service
 public class BaseModelImplServiceImpl extends BaseServiceImpl<BaseModelImpl, Long>{
