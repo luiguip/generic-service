@@ -8,10 +8,10 @@ public class BaseDomainModel {
 	private LocalDateTime createdAt;
 	private LocalDateTime updatedAt;
 
-	private BaseDomainModel() {
+	public BaseDomainModel() {
 	}
 	
-	private BaseDomainModel(Long id, LocalDateTime createdAt) {
+	public BaseDomainModel(Long id, LocalDateTime createdAt) {
 		this.id = id;
 		this.createdAt = createdAt;
 	}
@@ -40,16 +40,12 @@ public class BaseDomainModel {
 		this.updatedAt = updatedAt;
 	}
 
-	public static BaseDomainModel create() {
-		BaseDomainModel baseDomainModel = new BaseDomainModel();
-		baseDomainModel.setCreatedAt(LocalDateTime.now());
-		baseDomainModel.setUpdatedAt(LocalDateTime.now());
-		return baseDomainModel;
+	public void create() {
+		setCreatedAt(LocalDateTime.now());
+		setUpdatedAt(LocalDateTime.now());
 	}
 	
-	public static BaseDomainModel update(BaseDomainModel baseDomainModel) {
-		BaseDomainModel newBaseDomainModel = new BaseDomainModel(baseDomainModel.getId(), baseDomainModel.getCreatedAt());
-		newBaseDomainModel.setUpdatedAt(LocalDateTime.now());
-		return newBaseDomainModel;
+	public void update(BaseDomainModel baseDomainModel) {
+		setUpdatedAt(LocalDateTime.now());
 	}
 }
