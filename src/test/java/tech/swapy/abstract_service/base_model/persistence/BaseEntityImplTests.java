@@ -8,28 +8,25 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-import tech.swapy.abstract_service.base_model.commons.BaseModelImplTestCommons;
-import tech.swapy.abstract_service.base_model.persistence.BaseModelImpl;
+import tech.swapy.abstract_service.base_model.commons.BaseEntityImplTestCommons;
 
-@SpringBootTest
-class BaseModelImplTests {
+class BaseEntityImplTests {
 
-	BaseModelImpl baseModelImplX;
-	BaseModelImpl baseModelImplY;
+	BaseEntityImpl baseModelImplX;
+	BaseEntityImpl baseModelImplY;
 
 	@BeforeEach
 	void init() {
-		this.baseModelImplX = BaseModelImplTestCommons.createBaseModelImpl();
-		this.baseModelImplY = BaseModelImplTestCommons.cloneBaseModelImpl(baseModelImplX);
+		baseModelImplX = BaseEntityImplTestCommons.createBaseEntityImpl();
+		baseModelImplY = BaseEntityImplTestCommons.cloneBaseEntityImpl(baseModelImplX);
 	}
 
 	@Test
 	void shouldEqualsBeFalseWithNull() {
 		assertFalse(baseModelImplX.equals(null));
 	}
-	
+
 	@Test
 	void shouldEqualsBeFalseWithAnotherObject() {
 		assertFalse(baseModelImplX.equals(new String()));

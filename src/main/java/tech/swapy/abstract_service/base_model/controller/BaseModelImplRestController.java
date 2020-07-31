@@ -4,10 +4,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import tech.swapy.abstract_service.base.controller.BaseRestController;
-import tech.swapy.abstract_service.base_model.persistence.BaseModelImpl;
+import tech.swapy.abstract_service.base_model.persistence.BaseEntityImpl;
 
 @RestController
 @RequestMapping(value = "/base")
-public class BaseModelImplRestController extends BaseRestController<BaseModelImpl, Long> {
+public class BaseModelImplRestController extends BaseRestController<BaseEntityImpl, Long> {
 
 }

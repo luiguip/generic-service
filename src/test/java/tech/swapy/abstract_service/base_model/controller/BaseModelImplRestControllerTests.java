@@ -29,29 +29,29 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
 import tech.swapy.abstract_service.base.domain.BaseService;
-import tech.swapy.abstract_service.base_model.commons.BaseModelImplTestCommons;
-import tech.swapy.abstract_service.base_model.persistence.BaseModelImpl;
+import tech.swapy.abstract_service.base_model.commons.BaseEntityImplTestCommons;
+import tech.swapy.abstract_service.base_model.persistence.BaseEntityImpl;
 
 @SpringBootTest
 @AutoConfigureMockMvc
 public class BaseModelImplRestControllerTests {
 
-	private BaseModelImpl baseModelImplX;
-	private BaseModelImpl baseModelImplY;
-	private Optional<BaseModelImpl> optionalBaseModelImpl;
-	private List<BaseModelImpl> baseModelImplList;
+	private BaseEntityImpl baseModelImplX;
+	private BaseEntityImpl baseModelImplY;
+	private Optional<BaseEntityImpl> optionalBaseModelImpl;
+	private List<BaseEntityImpl> baseModelImplList;
 
 	@Autowired
 	private MockMvc mockMvc;
 	
 	@MockBean
-	private BaseService<BaseModelImpl, Long> baseModelImplServiceImpl;
+	private BaseService<BaseEntityImpl, Long> baseModelImplServiceImpl;
 	
 	@BeforeEach
 	void init() {
-		baseModelImplX = BaseModelImplTestCommons.createBaseModelImpl();
+		baseModelImplX = BaseEntityImplTestCommons.createBaseEntityImpl();
 		optionalBaseModelImpl = Optional.of(baseModelImplX);
-		baseModelImplY = BaseModelImplTestCommons.cloneBaseModelImpl(baseModelImplX);
+		baseModelImplY = BaseEntityImplTestCommons.cloneBaseModelImpl(baseModelImplX);
 		baseModelImplList = Arrays.asList(baseModelImplX, baseModelImplY);
 	}
 

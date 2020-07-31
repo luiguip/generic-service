@@ -7,19 +7,19 @@ import javax.persistence.Entity;
 import tech.swapy.abstract_service.base.persistence.BaseEntity;
 
 @Entity
-public class BaseModelImpl extends BaseEntity {
+public class BaseEntityImpl extends BaseEntity {
 
 	private static final long serialVersionUID = -7178894912746684212L;
 
-	public BaseModelImpl() {
+	public BaseEntityImpl() {
 		super();
 	}
 
-	public BaseModelImpl(LocalDateTime cratedAt, LocalDateTime updatedAt) {
+	public BaseEntityImpl(LocalDateTime cratedAt, LocalDateTime updatedAt) {
 		super(cratedAt, updatedAt);
 	}
 
-	public BaseModelImpl(Long id, LocalDateTime cratedAt, LocalDateTime updatedAt) {
+	public BaseEntityImpl(Long id, LocalDateTime cratedAt, LocalDateTime updatedAt) {
 		super(id, cratedAt, updatedAt);
 	}
 }

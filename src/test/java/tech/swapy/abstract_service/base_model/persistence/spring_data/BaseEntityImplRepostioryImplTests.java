@@ -1,4 +1,4 @@
-package tech.swapy.abstract_service.base_model.domain;
+package tech.swapy.abstract_service.base_model.persistence.spring_data;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -21,7 +21,7 @@ import tech.swapy.abstract_service.base_model.commons.BaseEntityImplTestCommons;
 import tech.swapy.abstract_service.base_model.persistence.BaseEntityImpl;
 
 @SpringBootTest
-class BaseModelImplServiceTests {
+class BaseEntityImplRepostioryImplTests {
 
 	private BaseEntityImpl baseModelImplX;
 	private BaseEntityImpl baseModelImplY;
