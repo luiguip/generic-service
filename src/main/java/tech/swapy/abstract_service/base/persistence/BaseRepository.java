@@ -1,11 +1,16 @@
 package tech.swapy.abstract_service.base.persistence;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.NoRepositoryBean;
+import tech.swapy.abstract_service.base.domain.BaseDomainModel;
 
-@NoRepositoryBean
-public interface BaseRepository<T extends BaseEntity, ID extends Serializable> extends JpaRepository<T, ID>{
+public interface BaseRepository<T extends BaseEntity, E extends BaseDomainModel, ID extends Serializable> {
 
+	public abstract E save(E domainModel);
+    public abstract List<E> findAll();
+    public abstract E findById(ID entityId);
+    public abstract E updateById(E domainModel, ID entityId);
+    public abstract void deleteById(ID entityId);
 }

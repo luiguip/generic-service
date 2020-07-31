@@ -6,14 +6,14 @@ import java.util.Optional;
 
 import tech.swapy.abstract_service.base.persistence.BaseEntity;
 
-public interface BaseService<T extends BaseEntity, ID extends Serializable>{
+public interface BaseService<E extends BaseDomainModel, ID extends Serializable>{
 	
-    public abstract T save(T entity);
-    public abstract List<T> findAll();
-    public abstract Optional<T> findById(ID entityId);
-    public abstract T update(T entity);
-    public abstract T updateById(T entity, ID entityId);   
-    public abstract void delete(T entity);
+    public abstract E save(E entity);
+    public abstract List<E> findAll();
+    public abstract Optional<E> findById(ID entityId);
+    public abstract E update(E entity);
+    public abstract E updateById(E entity, ID entityId);   
+    public abstract void delete(E entity);
     public abstract void deleteById(ID entityId);
     
 }

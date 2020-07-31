@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tech.swapy.abstract_service.base.persistence.BaseEntity;
-import tech.swapy.abstract_service.base.persistence.BaseRepository;
+import tech.swapy.abstract_service.base.persistence.spring_data.BaseSpringDataRepository;
 
 @Service
 @Transactional
@@ -19,7 +19,7 @@ public abstract class BaseServiceImpl<T extends BaseEntity, ID extends Serializa
 	@Autowired
 	private BaseRepository<T, ID> baseRepository;
 
-	public BaseServiceImpl(BaseRepository<T, ID> baseRepository) {
+	public BaseServiceImpl(BaseSpringDataRepository<T, ID> baseRepository) {
 		this.baseRepository = baseRepository;
 	}
 

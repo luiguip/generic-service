@@ -2,7 +2,7 @@ package tech.swapy.abstract_service.base.domain;
 
 import java.time.LocalDateTime;
 
-public class BaseDomainModel {
+public abstract class BaseDomainModel {
 
 	private Long id;
 	private LocalDateTime createdAt;
@@ -14,6 +14,12 @@ public class BaseDomainModel {
 	public BaseDomainModel(Long id, LocalDateTime createdAt) {
 		this.id = id;
 		this.createdAt = createdAt;
+	}
+
+	public BaseDomainModel(Long id, LocalDateTime createdAt, LocalDateTime updatedAt) {
+		this.id = id;
+		this.createdAt = createdAt;
+		this.updatedAt = updatedAt;
 	}
 
 	public Long getId() {
