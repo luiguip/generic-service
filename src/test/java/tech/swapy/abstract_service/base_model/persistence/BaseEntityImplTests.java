@@ -33,12 +33,6 @@ class BaseEntityImplTests {
 	}
 
 	@Test
-	void shouldEqualsBeFalseWithNullId() {
-		baseModelImplX.setId(null);
-		assertFalse(baseModelImplX.equals(baseModelImplX));
-	}
-
-	@Test
 	void shouldEqualsBeFalseWithDifferentIds() {
 		baseModelImplY.setId(baseModelImplX.getId() + 1);
 		assertFalse(baseModelImplY.equals(baseModelImplX));
