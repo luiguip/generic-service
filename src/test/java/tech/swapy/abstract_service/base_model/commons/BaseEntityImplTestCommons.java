@@ -16,8 +16,8 @@ public class BaseEntityImplTestCommons {
 		return new BaseEntityImpl(id, LocalDateTime.now().plusSeconds(seconds), LocalDateTime.now().plusSeconds(seconds));
 	}
 
-	public static BaseEntityImpl cloneBaseEntityImpl(BaseEntityImpl baseModelImpl) {
-		return new BaseEntityImpl(baseModelImpl.getId(), baseModelImpl.getCreatedAt(), baseModelImpl.getUpdatedAt());
+	public static BaseEntityImpl cloneBaseEntityImpl(BaseEntityImpl baseEntityImpl) {
+		return new BaseEntityImpl(baseEntityImpl.getId(), baseEntityImpl.getCreatedAt(), baseEntityImpl.getUpdatedAt());
 	}
 
 	public static List<BaseEntityImpl> createBaseEntityListImpl() {

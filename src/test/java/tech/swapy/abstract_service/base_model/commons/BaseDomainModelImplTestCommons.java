@@ -16,8 +16,8 @@ public class BaseDomainModelImplTestCommons {
 		return new BaseDomainModelImpl(id, LocalDateTime.now().plusSeconds(seconds), LocalDateTime.now().plusSeconds(seconds));
 	}
 
-	public static BaseDomainModelImpl cloneBaseDomainModelImpl(BaseDomainModelImpl baseModelImpl) {
-		return new BaseDomainModelImpl(baseModelImpl.getId(), baseModelImpl.getCreatedAt(), baseModelImpl.getUpdatedAt());
+	public static BaseDomainModelImpl cloneBaseDomainModelImpl(BaseDomainModelImpl baseDomainModelImpl) {
+		return new BaseDomainModelImpl(baseDomainModelImpl.getId(), baseDomainModelImpl.getCreatedAt(), baseDomainModelImpl.getUpdatedAt());
 	}
 
 	public static List<BaseDomainModelImpl> createBaseDomainModelListImpl() {
