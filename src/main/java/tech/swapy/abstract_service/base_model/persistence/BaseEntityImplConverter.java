@@ -3,9 +3,12 @@ package tech.swapy.abstract_service.base_model.persistence;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import tech.swapy.abstract_service.base.persistence.BaseEntityConverter;
 import tech.swapy.abstract_service.base_model.domain.BaseDomainModelImpl;
 
+@Component
 public class BaseEntityImplConverter implements BaseEntityConverter<BaseEntityImpl, BaseDomainModelImpl> {
 
 	@Override

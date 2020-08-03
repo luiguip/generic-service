@@ -7,44 +7,44 @@ import java.util.Optional;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import tech.swapy.abstract_service.base.domain.BaseDomainModel;
 import tech.swapy.abstract_service.base.persistence.BaseEntity;
 import tech.swapy.abstract_service.base.persistence.BaseEntityConverter;
 import tech.swapy.abstract_service.base.persistence.BaseRepository;
 
-@Repository
+@Service
 @Transactional
 public abstract class BaseRepositoryImpl<T extends BaseEntity, E extends BaseDomainModel, ID extends Serializable> implements BaseRepository<T, E, ID> {
 
 	@Autowired
-	private BaseSpringDataRepository<T, ID> baseRepository;
+	private BaseSpringDataRepository<T, ID> baseSpringDataRepository;
 	
 	@Autowired
 	private BaseEntityConverter<T, E> baseEntityConverter;
 
 	public BaseRepositoryImpl(BaseSpringDataRepository<T, ID> baseRepository, BaseEntityConverter<T, E> baseEntityConverter) {
-		this.baseRepository = baseRepository;
+		this.baseSpringDataRepository = baseRepository;
 		this.baseEntityConverter = baseEntityConverter;
 	}
 
 	@Override
 	public E save(E domainModel) {
 		T entity = baseEntityConverter.convert(domainModel);
-		T entitySaved = baseRepository.save(entity);
+		T entitySaved = baseSpringDataRepository.save(entity);
 		return baseEntityConverter.convert(entitySaved);
 	}
 
 	@Override
 	public List<E> findAll() {
-		List<T> entities = baseRepository.findAll();
+		List<T> entities = baseSpringDataRepository.findAll();
 		return baseEntityConverter.convertEntityList(entities);
 	}
 
 	@Override
 	public E findById(ID entityId) {
-		Optional<T> optionalEntity = baseRepository.findById(entityId);
+		Optional<T> optionalEntity = baseSpringDataRepository.findById(entityId);
 		if(optionalEntity.isPresent()) {
 			return baseEntityConverter.convert(optionalEntity.get());
 		} else {
@@ -55,9 +55,9 @@ public abstract class BaseRepositoryImpl<T extends BaseEntity, E extends BaseDom
 	@Override
 	public E updateById(E domainModel, ID entityId) {
 		T entity = baseEntityConverter.convert(domainModel);
-		Optional<T> optional = baseRepository.findById(entityId);
+		Optional<T> optional = baseSpringDataRepository.findById(entityId);
 		if (optional.isPresent()) {
-			return baseEntityConverter.convert(baseRepository.save(entity));
+			return baseEntityConverter.convert(baseSpringDataRepository.save(entity));
 		} else {
 			return null;
 		}
@@ -65,6 +65,6 @@ public abstract class BaseRepositoryImpl<T extends BaseEntity, E extends BaseDom
 
 	@Override
 	public void deleteById(ID entityId) {
-		baseRepository.deleteById(entityId);
+		baseSpringDataRepository.deleteById(entityId);
 	}
 }

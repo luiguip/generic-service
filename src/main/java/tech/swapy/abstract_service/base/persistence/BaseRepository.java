@@ -2,7 +2,6 @@ package tech.swapy.abstract_service.base.persistence;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Optional;
 
 import tech.swapy.abstract_service.base.domain.BaseDomainModel;
 

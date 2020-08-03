@@ -3,98 +3,109 @@ package tech.swapy.abstract_service.base_model.persistence.spring_data;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
-import tech.swapy.abstract_service.base.domain.BaseService;
+import tech.swapy.abstract_service.base.domain.BaseDomainModel;
+import tech.swapy.abstract_service.base.persistence.BaseEntityConverter;
+import tech.swapy.abstract_service.base.persistence.BaseRepository;
 import tech.swapy.abstract_service.base.persistence.spring_data.BaseSpringDataRepository;
+import tech.swapy.abstract_service.base_model.commons.BaseDomainModelImplTestCommons;
 import tech.swapy.abstract_service.base_model.commons.BaseEntityImplTestCommons;
+import tech.swapy.abstract_service.base_model.domain.BaseDomainModelImpl;
 import tech.swapy.abstract_service.base_model.persistence.BaseEntityImpl;
+import tech.swapy.abstract_service.base_model.persistence.BaseEntityImplConverter;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 class BaseEntityImplRepostioryImplTests {
 
-	private BaseEntityImpl baseModelImplX;
-	private BaseEntityImpl baseModelImplY;
-	private Optional<BaseEntityImpl> optionalBaseModelImpl;
-	private List<BaseEntityImpl> baseModelImplList;
+	private BaseEntityImpl baseEntityImplX;
+	private BaseEntityImpl baseEntityImplY;
+	private BaseDomainModelImpl baseDomainModelImplX;
+	private BaseDomainModelImpl baseDomainModelImplY;
+	private Optional<BaseEntityImpl> optionalBaseEntityImpl;
+	private Optional<BaseDomainModel> optionalBaseDomainModelImpl;
+	private List<BaseEntityImpl> baseEntityImplList;
+	private List<BaseDomainModelImpl> baseDomainModelImplList;
 
-	@Autowired
-	private BaseService<BaseEntityImpl, Long> baseModelImplService;
-
-	@MockBean
-	private BaseSpringDataRepository<BaseEntityImpl, Long> baseModelImplRepository;
+	private BaseRepository<BaseEntityImpl, BaseDomainModelImpl, Long> baseEntityImplRepository;
+	
+	@Mock
+	private BaseEntityConverter<BaseEntityImpl, BaseDomainModelImpl> baseEntityConverter;
+	@Mock
+	private BaseSpringDataRepository<BaseEntityImpl, Long> baseModelImplSpringDataRepository;
 
 	@BeforeEach
 	void init() {
-		baseModelImplX = BaseEntityImplTestCommons.createBaseEntityImpl();
-		optionalBaseModelImpl = Optional.of(baseModelImplX);
-		baseModelImplY = BaseEntityImplTestCommons.cloneBaseModelImpl(baseModelImplX);
-		baseModelImplList = Arrays.asList(baseModelImplX, baseModelImplY);
+		baseEntityImplRepository = new BaseEntityImplRepositoryImpl(baseModelImplSpringDataRepository, baseEntityConverter);
+		baseEntityImplX = BaseEntityImplTestCommons.createBaseEntityImpl();
+		baseEntityImplY = BaseEntityImplTestCommons.cloneBaseEntityImpl(baseEntityImplX);
+		baseDomainModelImplX = BaseDomainModelImplTestCommons.createBaseDomainModelImpl();
+		baseDomainModelImplY = BaseDomainModelImplTestCommons.cloneBaseDomainModelImpl(baseDomainModelImplX);
+		optionalBaseEntityImpl = Optional.of(baseEntityImplX);
+		optionalBaseDomainModelImpl = Optional.of(baseDomainModelImplX);
+		baseEntityImplList = BaseEntityImplTestCommons.createBaseEntityListImpl();
+		baseDomainModelImplList = BaseDomainModelImplTestCommons.createBaseDomainModelListImpl();
 	}
 
 	@Test
 	void shouldSave() {
-		baseModelImplY.setId(null);
-		when(baseModelImplRepository.save(baseModelImplY)).thenReturn(baseModelImplX);
-		assertThat(baseModelImplService.save(baseModelImplY)).isEqualTo(baseModelImplX);
+		baseEntityImplY.setId(null);
+		baseDomainModelImplY.setId(null);
+		lenient().when(baseEntityConverter.convert(baseDomainModelImplY)).thenReturn(baseEntityImplY);
+		lenient().when(baseModelImplSpringDataRepository.save(baseEntityImplY)).thenReturn(baseEntityImplX);
+		lenient().when(baseEntityConverter.convert(baseEntityImplX)).thenReturn(baseDomainModelImplX);
+		assertThat(baseEntityImplRepository.save(baseDomainModelImplY)).isEqualTo(baseDomainModelImplX);
 	}
 	
 	@Test
 	void shouldFindAll() {
-		when(baseModelImplRepository.findAll()).thenReturn(baseModelImplList);
-		assertThat(baseModelImplService.findAll()).isEqualTo(baseModelImplList);
+		lenient().when(baseModelImplSpringDataRepository.findAll()).thenReturn(baseEntityImplList);
+		lenient().when(baseEntityConverter.convertEntityList(baseEntityImplList)).thenReturn(baseDomainModelImplList);
+		assertThat(baseEntityImplRepository.findAll()).isEqualTo(baseDomainModelImplList);
 	}
 
 	@Test
 	void shouldFindById() {
-		when(baseModelImplRepository.findById(1L)).thenReturn(optionalBaseModelImpl);
-		assertThat(baseModelImplService.findById(1L)).isPresent();
+		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(optionalBaseEntityImpl);
+		lenient().when(baseEntityConverter.convert(baseEntityImplX)).thenReturn(baseDomainModelImplX);
+		assertThat(baseEntityImplRepository.findById(1L)).isEqualTo(baseDomainModelImplX);
 	}
 
 	@Test
 	void shouldNotFindById() {
-		when(baseModelImplRepository.findById(1L)).thenReturn(Optional.ofNullable(null));
-		assertThat(baseModelImplService.findById(1L)).isNotPresent();
+		when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(Optional.ofNullable(null));
+		assertThat(baseEntityImplRepository.findById(1L)).isNull();
 	}
-	
-	@Test
-	void shouldUpdate() {
-		when(baseModelImplRepository.save(baseModelImplY)).thenReturn(baseModelImplX);
-		assertThat(baseModelImplService.update(baseModelImplY)).isEqualTo(baseModelImplX);
-	}
-	
+
 	@Test
 	void shouldUpdateById() {
-		when(baseModelImplRepository.findById(1L)).thenReturn(optionalBaseModelImpl);
-		when(baseModelImplRepository.save(baseModelImplX)).thenReturn(baseModelImplX);
-		assertThat(baseModelImplService.updateById(baseModelImplX, 1L)).isEqualTo(baseModelImplX);
+		lenient().when(baseEntityConverter.convert(baseDomainModelImplX)).thenReturn(baseEntityImplX);
+		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(optionalBaseEntityImpl);
+		lenient().when(baseModelImplSpringDataRepository.save(baseEntityImplX)).thenReturn(baseEntityImplX);
+		lenient().when(baseEntityConverter.convert(baseEntityImplX)).thenReturn(baseDomainModelImplX);
+		assertThat(baseEntityImplRepository.updateById(baseDomainModelImplX, 1L)).isEqualTo(baseDomainModelImplX);
 	}
 	
 	@Test
 	void shouldNotUpdateById() {
-		when(baseModelImplRepository.findById(1L)).thenReturn(Optional.empty());
-		assertThat(baseModelImplService.updateById(baseModelImplX, 1L)).isNull();
+		when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(Optional.empty());
+		assertThat(baseEntityImplRepository.updateById(baseDomainModelImplX, 1L)).isNull();
 	}
-	
-	@Test
-	void shouldDelete() {
-		doNothing().when(baseModelImplRepository).delete(baseModelImplX);
-		assertDoesNotThrow(() -> baseModelImplService.delete(baseModelImplX));
-	}
-	
+
 	@Test
 	void shouldDeleteById() {
-		doNothing().when(baseModelImplRepository).deleteById(1L);
-		assertDoesNotThrow(() -> baseModelImplService.deleteById(1L));
+		doNothing().when(baseModelImplSpringDataRepository).deleteById(1L);
+		assertDoesNotThrow(() -> baseEntityImplRepository.deleteById(1L));
 	}
 }
