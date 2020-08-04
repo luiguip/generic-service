@@ -11,6 +11,6 @@ public interface BaseRepository<T extends BaseEntity, E extends BaseDomainModel,
 	public abstract E save(E domainModel);
     public abstract List<E> findAll();
     public abstract E findById(ID entityId) throws IdNotFoundException;
-    public abstract E updateById(E domainModel, ID entityId) throws IdNotFoundException;
+    public abstract E updateById(ID entityId, E domainModel) throws IdNotFoundException;
     public abstract void deleteById(ID entityId);
 }

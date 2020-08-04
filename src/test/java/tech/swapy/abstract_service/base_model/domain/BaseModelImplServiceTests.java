@@ -67,13 +67,13 @@ class BaseModelImplServiceTests {
 
 	@Test
 	void shouldUpdateById() {
-		when(baseEntityImplRepositoryImpl.updateById(baseDomainModelImplX, 1L)).thenReturn(baseDomainModelImplX);
+		when(baseEntityImplRepositoryImpl.updateById(1L, baseDomainModelImplX)).thenReturn(baseDomainModelImplX);
 		assertThat(baseModelImplService.updateById(1L, baseDomainModelImplX)).isEqualTo(baseDomainModelImplX);
 	}
 
 	@Test
 	void shouldNotUpdateById() {
-		when(baseEntityImplRepositoryImpl.updateById(baseDomainModelImplX, 1L)).thenReturn(null);
+		when(baseEntityImplRepositoryImpl.updateById(1L, baseDomainModelImplX)).thenReturn(null);
 		assertThat(baseModelImplService.updateById(1L, baseDomainModelImplX)).isNull();
 	}
 

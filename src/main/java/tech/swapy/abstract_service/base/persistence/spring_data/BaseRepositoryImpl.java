@@ -54,7 +54,7 @@ public abstract class BaseRepositoryImpl<T extends BaseEntity, E extends BaseDom
 	}
 
 	@Override
-	public E updateById(E domainModel, ID entityId) throws IdNotFoundException {
+	public E updateById(ID entityId, E domainModel) throws IdNotFoundException {
 		T entity = baseEntityConverter.convert(domainModel);
 		Optional<T> optional = baseSpringDataRepository.findById(entityId);
 		if (optional.isPresent()) {
