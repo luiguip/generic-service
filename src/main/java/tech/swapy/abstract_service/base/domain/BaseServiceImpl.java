@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import tech.swapy.abstract_service.base.domain.exceptions.IdNotFoundException;
 import tech.swapy.abstract_service.base.persistence.BaseEntity;
 import tech.swapy.abstract_service.base.persistence.BaseRepository;
 import tech.swapy.abstract_service.base.persistence.spring_data.BaseSpringDataRepository;
@@ -35,12 +36,12 @@ public abstract class BaseServiceImpl<E extends BaseDomainModel, ID extends Seri
 	}
 
 	@Override
-	public E findById(ID entityId) {
+	public E findById(ID entityId) throws IdNotFoundException{
 		return (E) baseRepository.findById(entityId);
 	}
 
 	@Override
-	public E updateById(ID entityId, E entity) {
+	public E updateById(ID entityId, E entity) throws IdNotFoundException{
 		return (E) baseRepository.updateById(entityId, entity);
 	}
 
