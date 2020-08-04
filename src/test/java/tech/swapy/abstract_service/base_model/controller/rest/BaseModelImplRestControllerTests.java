@@ -90,7 +90,7 @@ class BaseModelImplRestControllerTests {
 	@Test
 	void shouldUpdateById() {
 		lenient().when(baseComunicationModelImplConverter.convert(baseComunicationModelImplX)).thenReturn(baseDomainModelImplX);
-		lenient().when(baseModelImplService.updateById(baseDomainModelImplY, 1L)).thenReturn(baseDomainModelImplX);
+		lenient().when(baseModelImplService.updateById(1L, baseDomainModelImplY)).thenReturn(baseDomainModelImplX);
 		lenient().when(baseComunicationModelImplConverter.convert(baseDomainModelImplX)).thenReturn(baseComunicationModelImplX);
 		assertThat(baseImplRestController.updateById(1L, baseComunicationModelImplX)).isEqualTo(baseComunicationModelImplX);
 	}

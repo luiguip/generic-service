@@ -11,7 +11,7 @@ public interface BaseService<E extends BaseDomainModel, ID extends Serializable>
 	public abstract E save(E domainModel);
     public abstract List<E> findAll();
     public abstract E findById(ID entityId);
-    public abstract E updateById(E domainModel, ID entityId);
+    public abstract E updateById(ID entityId, E domainModel);
     public abstract void deleteById(ID entityId);
     
 }

@@ -50,7 +50,7 @@ public abstract class BaseRestController<T extends BaseComunicationModel, E exte
 	@PutMapping
 	public T updateById(@PathVariable ID id, @RequestBody T base) {
 		E baseDomain = baseComunicationModelConverter.convert(base);
-		return baseComunicationModelConverter.convert(baseService.updateById(baseDomain, id));
+		return baseComunicationModelConverter.convert(baseService.updateById(id, baseDomain));
 	}
 
 	@DeleteMapping("{id}")

@@ -40,7 +40,7 @@ public abstract class BaseServiceImpl<E extends BaseDomainModel, ID extends Seri
 	}
 
 	@Override
-	public E updateById(E entity, ID entityId) {
+	public E updateById(ID entityId, E entity) {
 		return (E) baseRepository.updateById(entity, entityId);
 	}
 
