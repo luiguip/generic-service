@@ -41,7 +41,7 @@ class BaseEntityImplRepostioryImplTests {
 	private List<BaseDomainModelImpl> baseDomainModelImplList;
 
 	private BaseRepository<BaseEntityImpl, BaseDomainModelImpl, Long> baseEntityImplRepository;
-	
+
 	@Mock
 	private BaseEntityConverter<BaseEntityImpl, BaseDomainModelImpl> baseEntityConverter;
 	@Mock
@@ -49,7 +49,8 @@ class BaseEntityImplRepostioryImplTests {
 
 	@BeforeEach
 	void init() {
-		baseEntityImplRepository = new BaseEntityImplRepositoryImpl(baseModelImplSpringDataRepository, baseEntityConverter);
+		baseEntityImplRepository = new BaseEntityImplRepositoryImpl(baseModelImplSpringDataRepository,
+				baseEntityConverter);
 		baseEntityImplX = BaseEntityImplTestCommons.createBaseEntityImpl();
 		baseEntityImplY = BaseEntityImplTestCommons.cloneBaseEntityImpl(baseEntityImplX);
 		baseDomainModelImplX = BaseDomainModelImplTestCommons.createBaseDomainModelImpl();
@@ -68,7 +69,7 @@ class BaseEntityImplRepostioryImplTests {
 		lenient().when(baseEntityConverter.convert(baseEntityImplX)).thenReturn(baseDomainModelImplX);
 		assertThat(baseEntityImplRepository.save(baseDomainModelImplY)).isEqualTo(baseDomainModelImplX);
 	}
-	
+
 	@Test
 	void shouldFindAll() {
 		lenient().when(baseModelImplSpringDataRepository.findAll()).thenReturn(baseEntityImplList);
@@ -87,7 +88,8 @@ class BaseEntityImplRepostioryImplTests {
 	void shouldNotFindById() throws IdNotFoundException {
 		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(Optional.ofNullable(null));
 		IdNotFoundException idNotFoundException = assertThrows(IdNotFoundException.class, () -> {
-			baseEntityImplRepository.findById(2L);});
+			baseEntityImplRepository.findById(2L);
+		});
 		String expectedMessage = "findById";
 		assertEquals(expectedMessage, idNotFoundException.getMessage());
 	}
@@ -100,12 +102,13 @@ class BaseEntityImplRepostioryImplTests {
 		lenient().when(baseEntityConverter.convert(baseEntityImplX)).thenReturn(baseDomainModelImplX);
 		assertThat(baseEntityImplRepository.updateById(1L, baseDomainModelImplX)).isEqualTo(baseDomainModelImplX);
 	}
-	
+
 	@Test
 	void shouldNotUpdateById() throws IdNotFoundException {
 		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(Optional.empty());
 		IdNotFoundException idNotFoundException = assertThrows(IdNotFoundException.class, () -> {
-			baseEntityImplRepository.updateById(2L, baseDomainModelImplX);});
+			baseEntityImplRepository.updateById(2L, baseDomainModelImplX);
+		});
 		String expectedMessage = "updateById";
 		assertEquals(expectedMessage, idNotFoundException.getMessage());
 	}
