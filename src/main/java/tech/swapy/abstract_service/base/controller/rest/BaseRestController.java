@@ -15,7 +15,6 @@ import tech.swapy.abstract_service.base.controller.BaseComunicationModel;
 import tech.swapy.abstract_service.base.controller.BaseComunicationModelConverter;
 import tech.swapy.abstract_service.base.domain.BaseDomainModel;
 import tech.swapy.abstract_service.base.domain.BaseService;
-import tech.swapy.abstract_service.base.domain.exceptions.IdNotFoundException;
 
 public abstract class BaseRestController<T extends BaseComunicationModel, E extends BaseDomainModel, ID extends Serializable> {
 
@@ -32,7 +31,7 @@ public abstract class BaseRestController<T extends BaseComunicationModel, E exte
 	}
 
 	@GetMapping("{id}")
-	public T findById(@PathVariable ID id) throws IdNotFoundException {
+	public T findById(@PathVariable ID id) {
 		return baseComunicationModelConverter.convert(baseService.findById(id));
 	}
 
@@ -48,7 +47,7 @@ public abstract class BaseRestController<T extends BaseComunicationModel, E exte
 	}
 
 	@PutMapping
-	public T updateById(@PathVariable ID id, @RequestBody T base) throws IdNotFoundException {
+	public T updateById(@PathVariable ID id, @RequestBody T base) {
 		E baseDomain = baseComunicationModelConverter.convert(base);
 		return baseComunicationModelConverter.convert(baseService.updateById(id, baseDomain));
 	}

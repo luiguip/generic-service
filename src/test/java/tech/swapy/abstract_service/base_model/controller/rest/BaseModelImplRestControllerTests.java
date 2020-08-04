@@ -74,7 +74,7 @@ class BaseModelImplRestControllerTests {
 	}
 
 	@Test
-	void shouldFindById() throws IdNotFoundException {
+	void shouldFindById() {
 		lenient().when(baseModelImplService.findById(1L)).thenReturn(baseDomainModelImplX);
 		lenient().when(baseComunicationModelImplConverter.convert(baseDomainModelImplX))
 				.thenReturn(baseComunicationModelImplX);
@@ -82,7 +82,7 @@ class BaseModelImplRestControllerTests {
 	}
 
 	@Test
-	void shouldNotFindById() throws IdNotFoundException {
+	void shouldNotFindById() {
 		lenient().when(baseModelImplService.findById(1L)).thenThrow(new IdNotFoundException("findById"));
 		IdNotFoundException idNotFoundException = assertThrows(IdNotFoundException.class, () -> {
 			baseImplRestController.findById(1L);
@@ -92,7 +92,7 @@ class BaseModelImplRestControllerTests {
 	}
 
 	@Test
-	void shouldUpdateById() throws IdNotFoundException {
+	void shouldUpdateById() {
 		lenient().when(baseComunicationModelImplConverter.convert(baseComunicationModelImplX))
 				.thenReturn(baseDomainModelImplX);
 		lenient().when(baseModelImplService.updateById(1L, baseDomainModelImplY)).thenReturn(baseDomainModelImplX);
@@ -103,9 +103,9 @@ class BaseModelImplRestControllerTests {
 	}
 
 	@Test
-	void shouldNotUpdateById() throws IdNotFoundException {
+	void shouldNotUpdateById() {
 		lenient().when(baseComunicationModelImplConverter.convert(baseComunicationModelImplX))
-		.thenReturn(baseDomainModelImplX);
+				.thenReturn(baseDomainModelImplX);
 		lenient().when(baseModelImplService.updateById(1L, baseDomainModelImplX))
 				.thenThrow(new IdNotFoundException("updateById"));
 		IdNotFoundException idNotFoundException = assertThrows(IdNotFoundException.class, () -> {

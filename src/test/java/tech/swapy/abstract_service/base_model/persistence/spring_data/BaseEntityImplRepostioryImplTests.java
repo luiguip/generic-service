@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.lenient;
-import static org.mockito.Mockito.when;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,9 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import tech.swapy.abstract_service.base.domain.BaseDomainModel;
 import tech.swapy.abstract_service.base.domain.exceptions.IdNotFoundException;
 import tech.swapy.abstract_service.base.persistence.BaseEntityConverter;
 import tech.swapy.abstract_service.base.persistence.BaseRepository;
@@ -27,7 +24,6 @@ import tech.swapy.abstract_service.base_model.commons.BaseDomainModelImplTestCom
 import tech.swapy.abstract_service.base_model.commons.BaseEntityImplTestCommons;
 import tech.swapy.abstract_service.base_model.domain.BaseDomainModelImpl;
 import tech.swapy.abstract_service.base_model.persistence.BaseEntityImpl;
-import tech.swapy.abstract_service.base_model.persistence.BaseEntityImplConverter;
 
 @ExtendWith(MockitoExtension.class)
 class BaseEntityImplRepostioryImplTests {
@@ -78,14 +74,14 @@ class BaseEntityImplRepostioryImplTests {
 	}
 
 	@Test
-	void shouldFindById() throws IdNotFoundException {
+	void shouldFindById() {
 		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(optionalBaseEntityImpl);
 		lenient().when(baseEntityConverter.convert(baseEntityImplX)).thenReturn(baseDomainModelImplX);
 		assertThat(baseEntityImplRepository.findById(1L)).isEqualTo(baseDomainModelImplX);
 	}
 
 	@Test
-	void shouldNotFindById() throws IdNotFoundException {
+	void shouldNotFindById() {
 		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(Optional.ofNullable(null));
 		IdNotFoundException idNotFoundException = assertThrows(IdNotFoundException.class, () -> {
 			baseEntityImplRepository.findById(2L);
@@ -95,7 +91,7 @@ class BaseEntityImplRepostioryImplTests {
 	}
 
 	@Test
-	void shouldUpdateById() throws IdNotFoundException {
+	void shouldUpdateById() {
 		lenient().when(baseEntityConverter.convert(baseDomainModelImplX)).thenReturn(baseEntityImplX);
 		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(optionalBaseEntityImpl);
 		lenient().when(baseModelImplSpringDataRepository.save(baseEntityImplX)).thenReturn(baseEntityImplX);
@@ -104,7 +100,7 @@ class BaseEntityImplRepostioryImplTests {
 	}
 
 	@Test
-	void shouldNotUpdateById() throws IdNotFoundException {
+	void shouldNotUpdateById() {
 		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(Optional.empty());
 		IdNotFoundException idNotFoundException = assertThrows(IdNotFoundException.class, () -> {
 			baseEntityImplRepository.updateById(2L, baseDomainModelImplX);

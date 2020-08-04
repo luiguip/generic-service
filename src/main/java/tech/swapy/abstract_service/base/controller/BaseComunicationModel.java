@@ -7,7 +7,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import tech.swapy.abstract_service.base.domain.BaseDomainModel;
 
 @NoArgsConstructor
 @AllArgsConstructor

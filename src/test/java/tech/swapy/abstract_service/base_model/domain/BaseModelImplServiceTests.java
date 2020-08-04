@@ -9,7 +9,6 @@ import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -59,13 +58,13 @@ class BaseModelImplServiceTests {
 	}
 
 	@Test
-	void shouldFindById() throws IdNotFoundException {
+	void shouldFindById() {
 		when(baseEntityImplRepositoryImpl.findById(1L)).thenReturn(baseDomainModelImplX);
 		assertThat(baseModelImplService.findById(1L)).isEqualTo(baseDomainModelImplX);
 	}
 
 	@Test
-	void shouldNotFindById() throws IdNotFoundException {
+	void shouldNotFindById() {
 		lenient().when(baseEntityImplRepositoryImpl.findById(1L)).thenThrow(new IdNotFoundException("findById"));
 		IdNotFoundException idNotFoundException = assertThrows(IdNotFoundException.class, () -> {
 			baseModelImplService.findById(1L);
@@ -75,13 +74,13 @@ class BaseModelImplServiceTests {
 	}
 
 	@Test
-	void shouldUpdateById() throws IdNotFoundException {
+	void shouldUpdateById() {
 		when(baseEntityImplRepositoryImpl.updateById(1L, baseDomainModelImplX)).thenReturn(baseDomainModelImplX);
 		assertThat(baseModelImplService.updateById(1L, baseDomainModelImplX)).isEqualTo(baseDomainModelImplX);
 	}
 
 	@Test
-	void shouldNotUpdateById() throws IdNotFoundException {
+	void shouldNotUpdateById() {
 		lenient().when(baseEntityImplRepositoryImpl.updateById(2L, baseDomainModelImplX))
 				.thenThrow(new IdNotFoundException("updateById"));
 		IdNotFoundException idNotFoundException = assertThrows(IdNotFoundException.class, () -> {

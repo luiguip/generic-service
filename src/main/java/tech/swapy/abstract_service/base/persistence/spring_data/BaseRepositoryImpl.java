@@ -17,15 +17,17 @@ import tech.swapy.abstract_service.base.persistence.BaseRepository;
 
 @Service
 @Transactional
-public abstract class BaseRepositoryImpl<T extends BaseEntity, E extends BaseDomainModel, ID extends Serializable> implements BaseRepository<T, E, ID> {
+public abstract class BaseRepositoryImpl<T extends BaseEntity, E extends BaseDomainModel, ID extends Serializable>
+		implements BaseRepository<T, E, ID> {
 
 	@Autowired
 	private BaseSpringDataRepository<T, ID> baseSpringDataRepository;
-	
+
 	@Autowired
 	private BaseEntityConverter<T, E> baseEntityConverter;
 
-	public BaseRepositoryImpl(BaseSpringDataRepository<T, ID> baseRepository, BaseEntityConverter<T, E> baseEntityConverter) {
+	public BaseRepositoryImpl(BaseSpringDataRepository<T, ID> baseRepository,
+			BaseEntityConverter<T, E> baseEntityConverter) {
 		this.baseSpringDataRepository = baseRepository;
 		this.baseEntityConverter = baseEntityConverter;
 	}
@@ -44,9 +46,9 @@ public abstract class BaseRepositoryImpl<T extends BaseEntity, E extends BaseDom
 	}
 
 	@Override
-	public E findById(ID entityId) throws IdNotFoundException {
+	public E findById(ID entityId) {
 		Optional<T> optionalEntity = baseSpringDataRepository.findById(entityId);
-		if(optionalEntity.isPresent()) {
+		if (optionalEntity.isPresent()) {
 			return baseEntityConverter.convert(optionalEntity.get());
 		} else {
 			throw new IdNotFoundException("findById");
@@ -54,7 +56,7 @@ public abstract class BaseRepositoryImpl<T extends BaseEntity, E extends BaseDom
 	}
 
 	@Override
-	public E updateById(ID entityId, E domainModel) throws IdNotFoundException {
+	public E updateById(ID entityId, E domainModel) {
 		T entity = baseEntityConverter.convert(domainModel);
 		Optional<T> optional = baseSpringDataRepository.findById(entityId);
 		if (optional.isPresent()) {
