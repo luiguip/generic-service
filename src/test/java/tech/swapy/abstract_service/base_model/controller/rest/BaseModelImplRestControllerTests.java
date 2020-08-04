@@ -1,4 +1,4 @@
-package tech.swapy.abstract_service.base_model.controller;
+package tech.swapy.abstract_service.base_model.controller.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
@@ -22,13 +22,14 @@ import tech.swapy.abstract_service.base.domain.BaseService;
 import tech.swapy.abstract_service.base.persistence.BaseRepository;
 import tech.swapy.abstract_service.base_model.commons.BaseComunicationModelImplTestCommons;
 import tech.swapy.abstract_service.base_model.commons.BaseDomainModelImplTestCommons;
+import tech.swapy.abstract_service.base_model.controller.BaseComunicationModelImpl;
 import tech.swapy.abstract_service.base_model.controller.rest.BaseModelImplRestController;
 import tech.swapy.abstract_service.base_model.domain.BaseDomainModelImpl;
 import tech.swapy.abstract_service.base_model.domain.BaseModelImplServiceImpl;
 import tech.swapy.abstract_service.base_model.persistence.BaseEntityImpl;
 
 @ExtendWith(MockitoExtension.class)
-public class BaseModelImplRestControllerTests {
+class BaseModelImplRestControllerTests {
 
 	private BaseComunicationModelImpl baseComunicationModelImplX;
 	private BaseComunicationModelImpl baseComunicationModelImplY;
