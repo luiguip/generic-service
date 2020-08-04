@@ -2,7 +2,6 @@ package tech.swapy.abstract_service.base.controller.rest;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -16,7 +15,7 @@ import tech.swapy.abstract_service.base.controller.BaseComunicationModel;
 import tech.swapy.abstract_service.base.controller.BaseComunicationModelConverter;
 import tech.swapy.abstract_service.base.domain.BaseDomainModel;
 import tech.swapy.abstract_service.base.domain.BaseService;
-import tech.swapy.abstract_service.base.persistence.BaseEntity;
+import tech.swapy.abstract_service.base.domain.exceptions.IdNotFoundException;
 
 public abstract class BaseRestController<T extends BaseComunicationModel, E extends BaseDomainModel, ID extends Serializable> {
 
@@ -25,17 +24,18 @@ public abstract class BaseRestController<T extends BaseComunicationModel, E exte
 
 	@Autowired
 	BaseComunicationModelConverter<T, E> baseComunicationModelConverter;
-	
-	public BaseRestController(BaseService<E, ID> baseService, BaseComunicationModelConverter<T, E> baseComunicationModelConverter) {
+
+	public BaseRestController(BaseService<E, ID> baseService,
+			BaseComunicationModelConverter<T, E> baseComunicationModelConverter) {
 		this.baseService = baseService;
 		this.baseComunicationModelConverter = baseComunicationModelConverter;
 	}
-	
+
 	@GetMapping("{id}")
-	public T findById(@PathVariable ID id) {
+	public T findById(@PathVariable ID id) throws IdNotFoundException {
 		return baseComunicationModelConverter.convert(baseService.findById(id));
 	}
-	
+
 	@GetMapping
 	public List<T> findAll() {
 		return baseComunicationModelConverter.convertDomainList(baseService.findAll());
@@ -48,7 +48,7 @@ public abstract class BaseRestController<T extends BaseComunicationModel, E exte
 	}
 
 	@PutMapping
-	public T updateById(@PathVariable ID id, @RequestBody T base) {
+	public T updateById(@PathVariable ID id, @RequestBody T base) throws IdNotFoundException {
 		E baseDomain = baseComunicationModelConverter.convert(base);
 		return baseComunicationModelConverter.convert(baseService.updateById(id, baseDomain));
 	}
