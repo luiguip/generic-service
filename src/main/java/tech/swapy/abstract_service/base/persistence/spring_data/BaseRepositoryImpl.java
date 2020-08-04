@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tech.swapy.abstract_service.base.domain.BaseDomainModel;
+import tech.swapy.abstract_service.base.domain.exceptions.IdNotFoundException;
 import tech.swapy.abstract_service.base.persistence.BaseEntity;
 import tech.swapy.abstract_service.base.persistence.BaseEntityConverter;
 import tech.swapy.abstract_service.base.persistence.BaseRepository;
@@ -43,23 +44,23 @@ public abstract class BaseRepositoryImpl<T extends BaseEntity, E extends BaseDom
 	}
 
 	@Override
-	public E findById(ID entityId) {
+	public E findById(ID entityId) throws IdNotFoundException {
 		Optional<T> optionalEntity = baseSpringDataRepository.findById(entityId);
 		if(optionalEntity.isPresent()) {
 			return baseEntityConverter.convert(optionalEntity.get());
 		} else {
-			return null;
+			throw new IdNotFoundException("findById");
 		}
 	}
 
 	@Override
-	public E updateById(E domainModel, ID entityId) {
+	public E updateById(E domainModel, ID entityId) throws IdNotFoundException {
 		T entity = baseEntityConverter.convert(domainModel);
 		Optional<T> optional = baseSpringDataRepository.findById(entityId);
 		if (optional.isPresent()) {
 			return baseEntityConverter.convert(baseSpringDataRepository.save(entity));
 		} else {
-			return null;
+			throw new IdNotFoundException("updateById");
 		}
 	}
 

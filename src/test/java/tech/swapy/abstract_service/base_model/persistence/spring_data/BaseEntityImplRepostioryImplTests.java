@@ -2,6 +2,8 @@ package tech.swapy.abstract_service.base_model.persistence.spring_data;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.Mockito.when;
@@ -17,6 +19,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import tech.swapy.abstract_service.base.domain.BaseDomainModel;
+import tech.swapy.abstract_service.base.domain.exceptions.IdNotFoundException;
 import tech.swapy.abstract_service.base.persistence.BaseEntityConverter;
 import tech.swapy.abstract_service.base.persistence.BaseRepository;
 import tech.swapy.abstract_service.base.persistence.spring_data.BaseSpringDataRepository;
@@ -34,7 +37,6 @@ class BaseEntityImplRepostioryImplTests {
 	private BaseDomainModelImpl baseDomainModelImplX;
 	private BaseDomainModelImpl baseDomainModelImplY;
 	private Optional<BaseEntityImpl> optionalBaseEntityImpl;
-	private Optional<BaseDomainModel> optionalBaseDomainModelImpl;
 	private List<BaseEntityImpl> baseEntityImplList;
 	private List<BaseDomainModelImpl> baseDomainModelImplList;
 
@@ -53,7 +55,6 @@ class BaseEntityImplRepostioryImplTests {
 		baseDomainModelImplX = BaseDomainModelImplTestCommons.createBaseDomainModelImpl();
 		baseDomainModelImplY = BaseDomainModelImplTestCommons.cloneBaseDomainModelImpl(baseDomainModelImplX);
 		optionalBaseEntityImpl = Optional.of(baseEntityImplX);
-		optionalBaseDomainModelImpl = Optional.of(baseDomainModelImplX);
 		baseEntityImplList = BaseEntityImplTestCommons.createBaseEntityListImpl();
 		baseDomainModelImplList = BaseDomainModelImplTestCommons.createBaseDomainModelListImpl();
 	}
@@ -76,20 +77,23 @@ class BaseEntityImplRepostioryImplTests {
 	}
 
 	@Test
-	void shouldFindById() {
+	void shouldFindById() throws IdNotFoundException {
 		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(optionalBaseEntityImpl);
 		lenient().when(baseEntityConverter.convert(baseEntityImplX)).thenReturn(baseDomainModelImplX);
 		assertThat(baseEntityImplRepository.findById(1L)).isEqualTo(baseDomainModelImplX);
 	}
 
 	@Test
-	void shouldNotFindById() {
-		when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(Optional.ofNullable(null));
-		assertThat(baseEntityImplRepository.findById(1L)).isNull();
+	void shouldNotFindById() throws IdNotFoundException {
+		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(Optional.ofNullable(null));
+		IdNotFoundException idNotFoundException = assertThrows(IdNotFoundException.class, () -> {
+			baseEntityImplRepository.findById(2L);});
+		String expectedMessage = "findById";
+		assertEquals(expectedMessage, idNotFoundException.getMessage());
 	}
 
 	@Test
-	void shouldUpdateById() {
+	void shouldUpdateById() throws IdNotFoundException {
 		lenient().when(baseEntityConverter.convert(baseDomainModelImplX)).thenReturn(baseEntityImplX);
 		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(optionalBaseEntityImpl);
 		lenient().when(baseModelImplSpringDataRepository.save(baseEntityImplX)).thenReturn(baseEntityImplX);
@@ -98,9 +102,12 @@ class BaseEntityImplRepostioryImplTests {
 	}
 	
 	@Test
-	void shouldNotUpdateById() {
-		when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(Optional.empty());
-		assertThat(baseEntityImplRepository.updateById(baseDomainModelImplX, 1L)).isNull();
+	void shouldNotUpdateById() throws IdNotFoundException {
+		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(Optional.empty());
+		IdNotFoundException idNotFoundException = assertThrows(IdNotFoundException.class, () -> {
+			baseEntityImplRepository.updateById(baseDomainModelImplX, 2L);});
+		String expectedMessage = "updateById";
+		assertEquals(expectedMessage, idNotFoundException.getMessage());
 	}
 
 	@Test
