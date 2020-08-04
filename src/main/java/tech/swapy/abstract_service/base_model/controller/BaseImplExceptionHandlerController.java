@@ -7,8 +7,4 @@ import tech.swapy.abstract_service.base.controller.BaseExceptionHandlerControlle
 @RestControllerAdvice
 public class BaseImplExceptionHandlerController extends BaseExceptionHandlerController {
 
-	public BaseImplExceptionHandlerController() {
-		super();
-	}
-
 }
