@@ -1,4 +1,4 @@
-package tech.swapy.abstract_service.base_model;
+package tech.swapy.abstract_service.base_model.persistence;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -8,34 +8,28 @@ import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class BaseModelImplTests {
+import tech.swapy.abstract_service.base_model.commons.BaseEntityImplTestCommons;
 
-	BaseModelImpl baseModelImplX;
-	BaseModelImpl baseModelImplY;
+class BaseEntityImplTests {
+
+	BaseEntityImpl baseModelImplX;
+	BaseEntityImpl baseModelImplY;
 
 	@BeforeEach
 	void init() {
-		this.baseModelImplX = BaseModelImplTestUtils.createBaseModelImpl();
-		this.baseModelImplY = BaseModelImplTestUtils.cloneBaseModelImpl(baseModelImplX);
+		baseModelImplX = BaseEntityImplTestCommons.createBaseEntityImpl();
+		baseModelImplY = BaseEntityImplTestCommons.cloneBaseEntityImpl(baseModelImplX);
 	}
 
 	@Test
 	void shouldEqualsBeFalseWithNull() {
 		assertFalse(baseModelImplX.equals(null));
 	}
-	
+
 	@Test
 	void shouldEqualsBeFalseWithAnotherObject() {
 		assertFalse(baseModelImplX.equals(new String()));
-	}
-
-	@Test
-	void shouldEqualsBeFalseWithNullId() {
-		baseModelImplX.setId(null);
-		assertFalse(baseModelImplX.equals(baseModelImplX));
 	}
 
 	@Test
