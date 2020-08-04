@@ -8,6 +8,6 @@ import tech.swapy.abstract_service.base_model.persistence.BaseEntityImpl;
 
 @Repository
 @Primary
-public interface BaseModelImplSpringDataRepository<T extends BaseEntityImpl, ID extends Long> extends BaseSpringDataRepository<T, ID> {
+public interface BaseEntityImplSpringDataRepository<T extends BaseEntityImpl, ID extends Long> extends BaseSpringDataRepository<T, ID> {
 
 }
