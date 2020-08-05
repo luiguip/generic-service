@@ -13,7 +13,7 @@ import lombok.Setter;
 @EqualsAndHashCode
 @Getter
 @Setter
-public abstract class BaseDomainModel {
+public class BaseDomainModel {
 
 	private Long id;
 	private LocalDateTime createdAt;
@@ -22,14 +22,5 @@ public abstract class BaseDomainModel {
 	public BaseDomainModel(Long id, LocalDateTime createdAt) {
 		this.id = id;
 		this.createdAt = createdAt;
-	}
-
-	public void create() {
-		setCreatedAt(LocalDateTime.now());
-		setUpdatedAt(LocalDateTime.now());
-	}
-
-	public void update(BaseDomainModel baseDomainModel) {
-		setUpdatedAt(LocalDateTime.now());
 	}
 }

@@ -11,20 +11,20 @@ import org.junit.jupiter.api.Test;
 
 import tech.swapy.abstract_service.base.domain.BaseDomainModel;
 
-class BaseDomainModelTests {
+class BaseDomainModelBuilderTests {
 	
+	private BaseDomainModelImplBuilder baseDomainModelImplBuilder;
 	private BaseDomainModel baseDomainModelX;
 
 	@BeforeEach
 	void init() {
+		baseDomainModelImplBuilder = new BaseDomainModelImplBuilder();
 		baseDomainModelX = new BaseDomainModelImpl();
-		baseDomainModelX.create();
 	}
 
 	@Test
 	void shouldCreateNewBusinessModel() {
-		BaseDomainModel baseDomainModel = new BaseDomainModelImpl();
-		baseDomainModel.create();
+		BaseDomainModel baseDomainModel = baseDomainModelImplBuilder.create();
 		assertNotNull(baseDomainModel.getCreatedAt());
 		assertNotNull(baseDomainModel.getUpdatedAt());
 	}
@@ -32,8 +32,15 @@ class BaseDomainModelTests {
 	@Test
 	void shouldCreateAnUpdatedDomainModel() {
 		baseDomainModelX.setUpdatedAt(LocalDateTime.now().minusSeconds(1));
-		BaseDomainModel baseDomainModelY = new BaseDomainModelImpl(baseDomainModelX.getId(), baseDomainModelX.getCreatedAt());
-		baseDomainModelY.update(baseDomainModelX);
+		BaseDomainModel baseDomainModelY = baseDomainModelImplBuilder.update(baseDomainModelX);
+		assertEquals(baseDomainModelX.getCreatedAt(), baseDomainModelY.getCreatedAt());
+		assertNotEquals(baseDomainModelX.getUpdatedAt(), baseDomainModelY.getUpdatedAt());
+	}
+	
+	@Test
+	void shouldBuildADomainModel() {
+		baseDomainModelX.setUpdatedAt(LocalDateTime.now().minusSeconds(1));
+		BaseDomainModel baseDomainModelY = baseDomainModelImplBuilder.build(baseDomainModelX.getId(), baseDomainModelX.getCreatedAt());
 		assertEquals(baseDomainModelX.getCreatedAt(), baseDomainModelY.getCreatedAt());
 		assertNotEquals(baseDomainModelX.getUpdatedAt(), baseDomainModelY.getUpdatedAt());
 	}
