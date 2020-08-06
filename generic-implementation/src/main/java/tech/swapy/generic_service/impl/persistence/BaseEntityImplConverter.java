@@ -1,5 +1,6 @@
 package tech.swapy.generic_service.impl.persistence;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,11 @@ import tech.swapy.generic_service.persistence.BaseEntityConverter;
 
 @Component
 public class BaseEntityImplConverter implements BaseEntityConverter<BaseEntityImpl, BaseDomainModelImpl> {
+
+	@Override
+	public BaseEntityImpl convertUpdate(BaseEntityImpl baseEntity, BaseEntityImpl baseEntityChanges) {
+		return new BaseEntityImpl(baseEntity.getId(), baseEntity.getCreatedAt(), baseEntityChanges.getUpdatedAt());
+	}
 
 	@Override
 	public BaseDomainModelImpl convert(BaseEntityImpl baseEntityImpl) {

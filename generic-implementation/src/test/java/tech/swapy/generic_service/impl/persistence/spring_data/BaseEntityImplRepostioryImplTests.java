@@ -94,6 +94,7 @@ class BaseEntityImplRepostioryImplTests {
 	void shouldUpdateById() {
 		lenient().when(baseEntityConverter.convert(baseDomainModelImplX)).thenReturn(baseEntityImplX);
 		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(optionalBaseEntityImpl);
+		lenient().when(baseEntityConverter.convertUpdate(optionalBaseEntityImpl.get(), baseEntityImplX)).thenReturn(baseEntityImplX); 
 		lenient().when(baseModelImplSpringDataRepository.save(baseEntityImplX)).thenReturn(baseEntityImplX);
 		lenient().when(baseEntityConverter.convert(baseEntityImplX)).thenReturn(baseDomainModelImplX);
 		assertThat(baseEntityImplRepository.updateById(1L, baseDomainModelImplX)).isEqualTo(baseDomainModelImplX);

@@ -2,6 +2,7 @@ package tech.swapy.generic_service.impl.persistence;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -26,6 +27,15 @@ class BaseEntityImplConverterTests {
 		baseDomainModelImpl = BaseDomainModelImplTestCommons.createBaseDomainModelImpl();
 		baseEntityImplList = BaseEntityImplTestCommons.createBaseEntityListImpl();
 		baseDomainModelImplList = BaseDomainModelImplTestCommons.createBaseDomainModelListImpl();
+	}
+
+	@Test
+	void shouldPassNotPassNullValues() {
+		BaseEntityImpl baseEntityToUpdate = new BaseEntityImpl(null, null, LocalDateTime.now().plusSeconds(1));
+		BaseEntityImpl finalBaseEntity = baseEntityImplConverter.convertUpdate(baseEntityImpl, baseEntityToUpdate);
+		assertThat(finalBaseEntity.getId()).isEqualTo(baseEntityImpl.getId());
+		assertThat(finalBaseEntity.getCreatedAt()).isEqualTo(baseEntityImpl.getCreatedAt());
+		assertThat(finalBaseEntity.getUpdatedAt()).isNotEqualTo(baseEntityImpl.getUpdatedAt());
 	}
 
 	@Test

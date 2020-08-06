@@ -60,7 +60,9 @@ public abstract class BaseRepositoryImpl<T extends BaseEntity, E extends BaseDom
 		T entity = baseEntityConverter.convert(domainModel);
 		Optional<T> optional = baseSpringDataRepository.findById(entityId);
 		if (optional.isPresent()) {
-			return baseEntityConverter.convert(baseSpringDataRepository.save(entity));
+			T entityToBeSaved = baseEntityConverter.convertUpdate(optional.get(), entity);
+			T entityUpdated = baseSpringDataRepository.save(entityToBeSaved);
+			return baseEntityConverter.convert(entityUpdated);
 		} else {
 			throw new IdNotFoundException("updateById");
 		}

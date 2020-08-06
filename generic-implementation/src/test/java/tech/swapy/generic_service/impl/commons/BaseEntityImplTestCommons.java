@@ -13,7 +13,7 @@ public class BaseEntityImplTestCommons {
 	}
 
 	public static BaseEntityImpl createBaseEntityImpl(Long id, int seconds) {
-		return new BaseEntityImpl(id, LocalDateTime.now().plusSeconds(seconds), LocalDateTime.now().plusSeconds(seconds));
+		return new BaseEntityImpl(id, LocalDateTime.now().minusSeconds(seconds), LocalDateTime.now().minusSeconds(seconds));
 	}
 
 	public static BaseEntityImpl cloneBaseEntityImpl(BaseEntityImpl baseEntityImpl) {
