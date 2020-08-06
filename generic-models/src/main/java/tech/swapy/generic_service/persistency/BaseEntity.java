@@ -20,7 +20,7 @@ import lombok.Setter;
 @EqualsAndHashCode
 @Getter
 @Setter
-public abstract class BaseEntity implements Serializable {
+public class BaseEntity implements Serializable {
 
 	private static final long serialVersionUID = 4807875741017925970L;
 	@Id
