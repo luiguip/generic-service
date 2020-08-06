@@ -18,13 +18,11 @@ class BaseDomainModelTests {
 	@BeforeEach
 	void init() {
 		baseDomainModelX = new BaseDomainModelImpl();
-		baseDomainModelX.create();
 	}
 
 	@Test
 	void shouldCreateNewBusinessModel() {
 		BaseDomainModel baseDomainModel = new BaseDomainModelImpl();
-		baseDomainModel.create();
 		assertNotNull(baseDomainModel.getCreatedAt());
 		assertNotNull(baseDomainModel.getUpdatedAt());
 	}
@@ -34,7 +32,6 @@ class BaseDomainModelTests {
 		baseDomainModelX.setUpdatedAt(LocalDateTime.now().minusSeconds(1));
 		BaseDomainModel baseDomainModelY = new BaseDomainModelImpl(baseDomainModelX.getId(),
 				baseDomainModelX.getCreatedAt());
-		baseDomainModelY.update(baseDomainModelX);
 		assertEquals(baseDomainModelX.getCreatedAt(), baseDomainModelY.getCreatedAt());
 		assertNotEquals(baseDomainModelX.getUpdatedAt(), baseDomainModelY.getUpdatedAt());
 	}

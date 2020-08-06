@@ -57,7 +57,7 @@ class BaseModelImplRestControllerTests {
 	void shouldSave() {
 		baseComunicationModelImplY.setId(null);
 		baseDomainModelImplY.setId(null);
-		lenient().when(baseComunicationModelImplConverter.convert(baseComunicationModelImplY))
+		lenient().when(baseComunicationModelImplConverter.convertCreate(baseComunicationModelImplY))
 				.thenReturn(baseDomainModelImplY);
 		lenient().when(baseModelImplService.save(baseDomainModelImplY)).thenReturn(baseDomainModelImplX);
 		lenient().when(baseComunicationModelImplConverter.convert(baseDomainModelImplX))
@@ -93,7 +93,7 @@ class BaseModelImplRestControllerTests {
 
 	@Test
 	void shouldUpdateById() {
-		lenient().when(baseComunicationModelImplConverter.convert(baseComunicationModelImplX))
+		lenient().when(baseComunicationModelImplConverter.convertUpdate(baseComunicationModelImplX))
 				.thenReturn(baseDomainModelImplX);
 		lenient().when(baseModelImplService.updateById(1L, baseDomainModelImplY)).thenReturn(baseDomainModelImplX);
 		lenient().when(baseComunicationModelImplConverter.convert(baseDomainModelImplX))
@@ -104,7 +104,7 @@ class BaseModelImplRestControllerTests {
 
 	@Test
 	void shouldNotUpdateById() {
-		lenient().when(baseComunicationModelImplConverter.convert(baseComunicationModelImplX))
+		lenient().when(baseComunicationModelImplConverter.convertUpdate(baseComunicationModelImplX))
 				.thenReturn(baseDomainModelImplX);
 		lenient().when(baseModelImplService.updateById(1L, baseDomainModelImplX))
 				.thenThrow(new IdNotFoundException("updateById"));

@@ -2,6 +2,7 @@ package tech.swapy.generic_service.impl.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -33,6 +34,23 @@ class BaseComunicationModelImplConverterTests {
 		BaseComunicationModelImpl baseComunicationModelImpl = baseComunicationModelImplConverter
 				.convert(baseDomainModelImpl);
 		checkFields(baseComunicationModelImpl, baseDomainModelImpl);
+	}
+
+	@Test
+	void shouldCreateBaseDomainModel() {
+		BaseDomainModelImpl baseDomainModelImpl = baseComunicationModelImplConverter.convertCreate(baseComunicationModelImpl);
+		assertThat(baseDomainModelImpl.getId()).isNull();
+		assertThat(baseDomainModelImpl.getCreatedAt()).isNotNull();
+		assertThat(baseDomainModelImpl.getUpdatedAt()).isNotNull();
+	}
+
+	@Test
+	void shouldUpdateBaseDomainModel() {
+		baseComunicationModelImpl.setUpdatedAt(LocalDateTime.now().minusSeconds(1));
+		BaseDomainModelImpl baseDomainModelImpl = baseComunicationModelImplConverter.convertUpdate(baseComunicationModelImpl);
+		assertThat(baseDomainModelImpl.getId()).isEqualTo(baseComunicationModelImpl.getId());
+		assertThat(baseComunicationModelImpl.getCreatedAt()).isEqualTo(baseDomainModelImpl.getCreatedAt());
+		assertThat(baseComunicationModelImpl.getUpdatedAt()).isNotEqualTo(baseDomainModelImpl.getUpdatedAt());
 	}
 
 	@Test

@@ -14,7 +14,7 @@ public class BaseComunicationModelImplTestCommons {
 	}
 
 	public static BaseComunicationModelImpl createBaseComunicationModelImpl(Long id, int seconds) {
-		return new BaseComunicationModelImpl(id, LocalDateTime.now().plusSeconds(seconds), LocalDateTime.now().plusSeconds(seconds));
+		return new BaseComunicationModelImpl(id, LocalDateTime.now().minusSeconds(seconds), LocalDateTime.now().minusSeconds(seconds));
 	}
 
 	public static BaseComunicationModelImpl cloneBaseComunicationModelImpl(BaseComunicationModelImpl baseComunicationModelImpl) {

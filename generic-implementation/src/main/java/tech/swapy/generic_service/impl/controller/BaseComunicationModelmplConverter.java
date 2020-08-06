@@ -19,6 +19,15 @@ public class BaseComunicationModelmplConverter
 	}
 
 	@Override
+	public BaseDomainModelImpl convertCreate(BaseComunicationModelImpl baseComunicationModelImpl) {
+		return new BaseDomainModelImpl();
+	}
+
+	@Override
+	public BaseDomainModelImpl convertUpdate(BaseComunicationModelImpl baseComunicationModelImpl) {
+		return new BaseDomainModelImpl(baseComunicationModelImpl.getId(), baseComunicationModelImpl.getCreatedAt());
+	}
+	@Override
 	public BaseComunicationModelImpl convert(BaseDomainModelImpl baseDomainModelImpl) {
 		return new BaseComunicationModelImpl(baseDomainModelImpl.getId(), baseDomainModelImpl.getCreatedAt(),
 				baseDomainModelImpl.getUpdatedAt());
