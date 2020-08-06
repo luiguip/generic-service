@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>2.3.1.RELEASE</version>
-		<relativePath/>
+		<relativePath />
 	</parent>
 	<groupId>tech.swapy</groupId>
 	<artifactId>generic-service</artifactId>
@@ -19,11 +21,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>tech.swapy</groupId>
-			<artifactId>services-utils</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
-		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -54,35 +51,17 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<executions>
-					<execution>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-						<phase>package</phase>
-						<configuration>
-							<classifier>library</classifier>
-							<includes>
-								<include>**/base/*</include>
-							</includes>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
-	</build>
+	<!-- <build> <plugins> <plugin> <groupId>org.apache.maven.plugins</groupId> 
+		<artifactId>maven-jar-plugin</artifactId> <executions> <execution> <goals> 
+		<goal>jar</goal> </goals> <phase>package</phase> <configuration> <classifier>library</classifier> 
+		<includes> <include>**/base/*</include> </includes> </configuration> </execution> 
+		</executions> </plugin> <plugin> <groupId>org.springframework.boot</groupId> 
+		<artifactId>spring-boot-maven-plugin</artifactId> </plugin> </plugins> </build> -->
 	<modules>
-		<module>repository</module>
-    <module>generic-repository</module>
-  </modules>
+		<module>generic-repository</module>
+		<module>generic-controller</module>
+		<module>generic-domain</module>
+		<module>generic-implementation</module>
+		<module>generic-models</module>
+	</modules>
 </project>

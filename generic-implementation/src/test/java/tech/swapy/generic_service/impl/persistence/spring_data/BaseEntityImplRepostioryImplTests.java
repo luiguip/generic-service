@@ -16,15 +16,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import tech.swapy.generic_service.impl.base.domain.exceptions.IdNotFoundException;
-import tech.swapy.generic_service.impl.base.persistence.BaseEntityConverter;
-import tech.swapy.generic_service.impl.base.persistence.BaseRepository;
-import tech.swapy.generic_service.impl.base.persistence.spring_data.BaseSpringDataRepository;
+import tech.swapy.generic_service.exceptions.IdNotFoundException;
 import tech.swapy.generic_service.impl.commons.BaseDomainModelImplTestCommons;
 import tech.swapy.generic_service.impl.commons.BaseEntityImplTestCommons;
-import tech.swapy.generic_service.impl.impl.domain.BaseDomainModelImpl;
+import tech.swapy.generic_service.impl.domain.BaseDomainModelImpl;
 import tech.swapy.generic_service.impl.persistence.BaseEntityImpl;
-import tech.swapy.generic_service.impl.persistence.spring_data.BaseEntityImplRepositoryImpl;
+import tech.swapy.generic_service.persistence.BaseEntityConverter;
+import tech.swapy.generic_service.persistence.BaseRepository;
+import tech.swapy.generic_service.persistence.spring_data.BaseSpringDataRepository;
 
 @ExtendWith(MockitoExtension.class)
 class BaseEntityImplRepostioryImplTests {

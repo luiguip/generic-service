@@ -9,10 +9,10 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import tech.swapy.generic_service.impl.base.domain.BaseDomainModel;
+import tech.swapy.generic_service.domain.BaseDomainModel;
 
 class BaseDomainModelTests {
-	
+
 	private BaseDomainModel baseDomainModelX;
 
 	@BeforeEach
@@ -32,7 +32,8 @@ class BaseDomainModelTests {
 	@Test
 	void shouldCreateAnUpdatedDomainModel() {
 		baseDomainModelX.setUpdatedAt(LocalDateTime.now().minusSeconds(1));
-		BaseDomainModel baseDomainModelY = new BaseDomainModelImpl(baseDomainModelX.getId(), baseDomainModelX.getCreatedAt());
+		BaseDomainModel baseDomainModelY = new BaseDomainModelImpl(baseDomainModelX.getId(),
+				baseDomainModelX.getCreatedAt());
 		baseDomainModelY.update(baseDomainModelX);
 		assertEquals(baseDomainModelX.getCreatedAt(), baseDomainModelY.getCreatedAt());
 		assertNotEquals(baseDomainModelX.getUpdatedAt(), baseDomainModelY.getUpdatedAt());

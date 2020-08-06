@@ -9,11 +9,11 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tech.swapy.abstract_service.base.domain.BaseDomainModel;
-import tech.swapy.abstract_service.base.domain.exceptions.IdNotFoundException;
-import tech.swapy.generic_service.persistence.BaseEntity;
+import tech.swapy.generic_service.domain.BaseDomainModel;
+import tech.swapy.generic_service.exceptions.IdNotFoundException;
 import tech.swapy.generic_service.persistence.BaseEntityConverter;
 import tech.swapy.generic_service.persistence.BaseRepository;
+import tech.swapy.generic_service.persistency.BaseEntity;
 
 @Service
 @Transactional

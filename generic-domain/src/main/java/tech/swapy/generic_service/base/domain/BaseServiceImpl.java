@@ -1,4 +1,4 @@
-package tech.swapy.abstract_service.base.domain;
+package tech.swapy.generic_service.base.domain;
 
 import java.io.Serializable;
 import java.util.List;
@@ -8,7 +8,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tech.swapy.abstract_service.base.persistence.BaseRepository;
+import tech.swapy.generic_service.domain.BaseDomainModel;
+import tech.swapy.generic_service.persistence.BaseRepository;
 
 @Service
 @Transactional

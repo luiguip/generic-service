@@ -1,4 +1,4 @@
-package tech.swapy.generic_service.impl.impl;
+package tech.swapy.generic_service.impl;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

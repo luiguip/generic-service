@@ -1,7 +1,9 @@
-package tech.swapy.abstract_service.base.domain;
+package tech.swapy.generic_service.base.domain;
 
 import java.io.Serializable;
 import java.util.List;
+
+import tech.swapy.generic_service.domain.BaseDomainModel;
 
 public interface BaseService<E extends BaseDomainModel, ID extends Serializable> {
 

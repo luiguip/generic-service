@@ -3,11 +3,11 @@ package tech.swapy.generic_service.impl.controller.rest;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tech.swapy.generic_service.impl.base.controller.BaseComunicationModelConverter;
-import tech.swapy.generic_service.impl.base.controller.rest.BaseRestController;
-import tech.swapy.generic_service.impl.base.domain.BaseService;
+import tech.swapy.generic_service.base.domain.BaseService;
+import tech.swapy.generic_service.controller.BaseComunicationModelConverter;
+import tech.swapy.generic_service.controller.rest.BaseRestController;
 import tech.swapy.generic_service.impl.controller.BaseComunicationModelImpl;
-import tech.swapy.generic_service.impl.impl.domain.BaseDomainModelImpl;
+import tech.swapy.generic_service.impl.domain.BaseDomainModelImpl;
 
 @RestController
 @RequestMapping(value = "/base")

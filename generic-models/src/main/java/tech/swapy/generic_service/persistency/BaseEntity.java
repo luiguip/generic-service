@@ -1,4 +1,4 @@
-package tech.swapy.generic_service.persistence;
+package tech.swapy.generic_service.persistency;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;

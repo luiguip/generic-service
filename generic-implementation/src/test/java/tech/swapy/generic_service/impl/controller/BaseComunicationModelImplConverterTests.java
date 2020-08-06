@@ -7,12 +7,10 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import tech.swapy.generic_service.impl.base.controller.BaseComunicationModelConverter;
+import tech.swapy.generic_service.controller.BaseComunicationModelConverter;
 import tech.swapy.generic_service.impl.commons.BaseComunicationModelImplTestCommons;
 import tech.swapy.generic_service.impl.commons.BaseDomainModelImplTestCommons;
-import tech.swapy.generic_service.impl.controller.BaseComunicationModelImpl;
-import tech.swapy.generic_service.impl.controller.BaseComunicationModelmplConverter;
-import tech.swapy.generic_service.impl.impl.domain.BaseDomainModelImpl;
+import tech.swapy.generic_service.impl.domain.BaseDomainModelImpl;
 
 class BaseComunicationModelImplConverterTests {
 

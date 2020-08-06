@@ -5,8 +5,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import tech.swapy.generic_service.impl.base.controller.BaseComunicationModelConverter;
-import tech.swapy.generic_service.impl.impl.domain.BaseDomainModelImpl;
+import tech.swapy.generic_service.controller.BaseComunicationModelConverter;
+import tech.swapy.generic_service.impl.domain.BaseDomainModelImpl;
 
 @Component
 public class BaseComunicationModelmplConverter

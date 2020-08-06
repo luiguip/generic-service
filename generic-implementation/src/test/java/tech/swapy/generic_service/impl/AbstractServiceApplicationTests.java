@@ -1,4 +1,4 @@
-package tech.swapy.generic_service;
+package tech.swapy.generic_service.impl;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

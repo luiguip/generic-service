@@ -1,4 +1,4 @@
-package tech.swapy.abstract_service.base.domain;
+package tech.swapy.generic_service.domain;
 
 import java.time.LocalDateTime;
 

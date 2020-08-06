@@ -2,7 +2,7 @@ package tech.swapy.generic_service.controller;
 
 import java.util.List;
 
-import tech.swapy.abstract_service.base.domain.BaseDomainModel;
+import tech.swapy.generic_service.domain.BaseDomainModel;
 
 public interface BaseComunicationModelConverter<T extends BaseComunicationModel, E extends BaseDomainModel>{
 	public abstract E convert(T baseEntity);

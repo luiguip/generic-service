@@ -1,4 +1,4 @@
-package tech.swapy.abstract_service.base.domain.exceptions;
+package tech.swapy.generic_service.exceptions;
 
 public class IdNotFoundException extends RuntimeException{
 

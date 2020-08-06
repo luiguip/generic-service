@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 
-import tech.swapy.generic_service.impl.base.persistence.BaseEntity;
+import tech.swapy.generic_service.persistency.BaseEntity;
 
 @Entity
 public class BaseEntityImpl extends BaseEntity {

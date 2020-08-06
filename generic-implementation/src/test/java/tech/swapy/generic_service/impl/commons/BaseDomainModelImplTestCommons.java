@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-import tech.swapy.generic_service.impl.impl.domain.BaseDomainModelImpl;
+import tech.swapy.generic_service.impl.domain.BaseDomainModelImpl;
 
 public class BaseDomainModelImplTestCommons {
 

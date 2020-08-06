@@ -3,7 +3,8 @@ package tech.swapy.generic_service.persistence;
 import java.io.Serializable;
 import java.util.List;
 
-import tech.swapy.abstract_service.base.domain.BaseDomainModel;
+import tech.swapy.generic_service.domain.BaseDomainModel;
+import tech.swapy.generic_service.persistency.BaseEntity;
 
 public interface BaseRepository<T extends BaseEntity, E extends BaseDomainModel, ID extends Serializable> {
 
