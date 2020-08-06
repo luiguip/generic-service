@@ -32,24 +32,28 @@ public abstract class BaseRestController<T extends BaseComunicationModel, E exte
 
 	@GetMapping("{id}")
 	public T findById(@PathVariable ID id) {
-		return baseComunicationModelConverter.convert(baseService.findById(id));
+		E baseDomain = baseService.findById(id);
+		return baseComunicationModelConverter.convert(baseDomain);
 	}
 
 	@GetMapping
 	public List<T> findAll() {
-		return baseComunicationModelConverter.convertDomainList(baseService.findAll());
+		List<E> baseDomainList = baseService.findAll();
+		return baseComunicationModelConverter.convertDomainList(baseDomainList);
 	}
 
 	@PostMapping
 	public T save(@RequestBody T base) {
-		E baseDomain = baseComunicationModelConverter.convert(base);
-		return baseComunicationModelConverter.convert(baseService.save(baseDomain));
+		E baseDomain = baseComunicationModelConverter.convertCreate(base);
+		E baseDomainSaved = baseService.save(baseDomain);
+		return baseComunicationModelConverter.convert(baseDomainSaved);
 	}
 
-	@PutMapping
+	@PutMapping("{id}")
 	public T updateById(@PathVariable ID id, @RequestBody T base) {
-		E baseDomain = baseComunicationModelConverter.convert(base);
-		return baseComunicationModelConverter.convert(baseService.updateById(id, baseDomain));
+		E baseDomain = baseComunicationModelConverter.convertUpdate(base);
+		E baseDomainUpdated = baseService.updateById(id, baseDomain);
+		return baseComunicationModelConverter.convert(baseDomainUpdated);
 	}
 
 	@DeleteMapping("{id}")

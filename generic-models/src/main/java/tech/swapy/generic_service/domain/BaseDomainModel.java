@@ -5,10 +5,8 @@ import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode
 @Getter
@@ -22,14 +20,11 @@ public abstract class BaseDomainModel {
 	public BaseDomainModel(Long id, LocalDateTime createdAt) {
 		this.id = id;
 		this.createdAt = createdAt;
-	}
-
-	public void create() {
-		setCreatedAt(LocalDateTime.now());
 		setUpdatedAt(LocalDateTime.now());
 	}
 
-	public void update(BaseDomainModel baseDomainModel) {
+	public BaseDomainModel() {
+		setCreatedAt(LocalDateTime.now());
 		setUpdatedAt(LocalDateTime.now());
 	}
 }
