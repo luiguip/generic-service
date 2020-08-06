@@ -20,8 +20,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import tech.swapy.generic_service.base.domain.BaseService;
 import tech.swapy.generic_service.exceptions.IdNotFoundException;
 import tech.swapy.generic_service.impl.commons.BaseDomainModelImplTestCommons;
-import tech.swapy.generic_service.impl.persistence.BaseEntityImpl;
 import tech.swapy.generic_service.persistence.BaseRepository;
+import tech.swapy.generic_service.persistency.BaseEntity;
 
 @ExtendWith(MockitoExtension.class)
 class BaseModelImplServiceTests {
@@ -34,11 +34,11 @@ class BaseModelImplServiceTests {
 	private BaseService<BaseDomainModelImpl, Long> baseModelImplService;
 
 	@Mock
-	private BaseRepository<BaseEntityImpl, BaseDomainModelImpl, Long> baseEntityImplRepositoryImpl;
+	private BaseRepository<BaseEntity, BaseDomainModelImpl, Long> baseEntityRepositoryImpl;
 
 	@BeforeEach
 	void init() {
-		baseModelImplService = new BaseModelImplServiceImpl(baseEntityImplRepositoryImpl);
+		baseModelImplService = new BaseModelImplServiceImpl(baseEntityRepositoryImpl);
 		baseDomainModelImplX = BaseDomainModelImplTestCommons.createBaseDomainModelImpl();
 		baseDomainModelImplY = BaseDomainModelImplTestCommons.cloneBaseDomainModelImpl(baseDomainModelImplX);
 		baseDomainModelImplList = BaseDomainModelImplTestCommons.createBaseDomainModelListImpl();
@@ -47,25 +47,25 @@ class BaseModelImplServiceTests {
 	@Test
 	void shouldSave() {
 		baseDomainModelImplY.setId(null);
-		when(baseEntityImplRepositoryImpl.save(baseDomainModelImplY)).thenReturn(baseDomainModelImplX);
+		when(baseEntityRepositoryImpl.save(baseDomainModelImplY)).thenReturn(baseDomainModelImplX);
 		assertThat(baseModelImplService.save(baseDomainModelImplY)).isEqualTo(baseDomainModelImplX);
 	}
 
 	@Test
 	void shouldFindAll() {
-		when(baseEntityImplRepositoryImpl.findAll()).thenReturn(baseDomainModelImplList);
+		when(baseEntityRepositoryImpl.findAll()).thenReturn(baseDomainModelImplList);
 		assertThat(baseModelImplService.findAll()).isEqualTo(baseDomainModelImplList);
 	}
 
 	@Test
 	void shouldFindById() {
-		when(baseEntityImplRepositoryImpl.findById(1L)).thenReturn(baseDomainModelImplX);
+		when(baseEntityRepositoryImpl.findById(1L)).thenReturn(baseDomainModelImplX);
 		assertThat(baseModelImplService.findById(1L)).isEqualTo(baseDomainModelImplX);
 	}
 
 	@Test
 	void shouldNotFindById() {
-		lenient().when(baseEntityImplRepositoryImpl.findById(1L)).thenThrow(new IdNotFoundException("findById"));
+		lenient().when(baseEntityRepositoryImpl.findById(1L)).thenThrow(new IdNotFoundException("findById"));
 		IdNotFoundException idNotFoundException = assertThrows(IdNotFoundException.class, () -> {
 			baseModelImplService.findById(1L);
 		});
@@ -75,13 +75,13 @@ class BaseModelImplServiceTests {
 
 	@Test
 	void shouldUpdateById() {
-		when(baseEntityImplRepositoryImpl.updateById(1L, baseDomainModelImplX)).thenReturn(baseDomainModelImplX);
+		when(baseEntityRepositoryImpl.updateById(1L, baseDomainModelImplX)).thenReturn(baseDomainModelImplX);
 		assertThat(baseModelImplService.updateById(1L, baseDomainModelImplX)).isEqualTo(baseDomainModelImplX);
 	}
 
 	@Test
 	void shouldNotUpdateById() {
-		lenient().when(baseEntityImplRepositoryImpl.updateById(2L, baseDomainModelImplX))
+		lenient().when(baseEntityRepositoryImpl.updateById(2L, baseDomainModelImplX))
 				.thenThrow(new IdNotFoundException("updateById"));
 		IdNotFoundException idNotFoundException = assertThrows(IdNotFoundException.class, () -> {
 			baseModelImplService.updateById(2L, baseDomainModelImplX);
@@ -92,7 +92,7 @@ class BaseModelImplServiceTests {
 
 	@Test
 	void shouldDeleteById() {
-		doNothing().when(baseEntityImplRepositoryImpl).deleteById(1L);
+		doNothing().when(baseEntityRepositoryImpl).deleteById(1L);
 		assertDoesNotThrow(() -> baseModelImplService.deleteById(1L));
 	}
 }

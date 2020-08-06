@@ -9,73 +9,74 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import tech.swapy.generic_service.impl.commons.BaseDomainModelImplTestCommons;
-import tech.swapy.generic_service.impl.commons.BaseEntityImplTestCommons;
+import tech.swapy.generic_service.impl.commons.BaseEntityTestCommons;
 import tech.swapy.generic_service.impl.domain.BaseDomainModelImpl;
 import tech.swapy.generic_service.persistence.BaseEntityConverter;
+import tech.swapy.generic_service.persistency.BaseEntity;
 
-class BaseEntityImplConverterTests {
+class BaseEntityConverterTests {
 
-	private BaseEntityImpl baseEntityImpl;
+	private BaseEntity baseEntity;
 	private BaseDomainModelImpl baseDomainModelImpl;
-	private List<BaseEntityImpl> baseEntityImplList;
+	private List<BaseEntity> baseEntityList;
 	private List<BaseDomainModelImpl> baseDomainModelImplList;
-	private BaseEntityConverter<BaseEntityImpl, BaseDomainModelImpl> baseEntityImplConverter = new BaseEntityImplConverter();
+	private BaseEntityConverter<BaseEntity, BaseDomainModelImpl> baseEntityConverter = new BaseEntityConverterImpl();
 
 	@BeforeEach
 	void init() {
-		baseEntityImpl = BaseEntityImplTestCommons.createBaseEntityImpl();
+		baseEntity = BaseEntityTestCommons.createBaseEntity();
 		baseDomainModelImpl = BaseDomainModelImplTestCommons.createBaseDomainModelImpl();
-		baseEntityImplList = BaseEntityImplTestCommons.createBaseEntityListImpl();
+		baseEntityList = BaseEntityTestCommons.createBaseEntityListImpl();
 		baseDomainModelImplList = BaseDomainModelImplTestCommons.createBaseDomainModelListImpl();
 	}
 
 	@Test
 	void shouldPassNotPassNullValues() {
-		BaseEntityImpl baseEntityToUpdate = new BaseEntityImpl(null, null, LocalDateTime.now().plusSeconds(1));
-		BaseEntityImpl finalBaseEntity = baseEntityImplConverter.convertUpdate(baseEntityImpl, baseEntityToUpdate);
-		assertThat(finalBaseEntity.getId()).isEqualTo(baseEntityImpl.getId());
-		assertThat(finalBaseEntity.getCreatedAt()).isEqualTo(baseEntityImpl.getCreatedAt());
-		assertThat(finalBaseEntity.getUpdatedAt()).isNotEqualTo(baseEntityImpl.getUpdatedAt());
+		BaseEntity baseEntityToUpdate = new BaseEntity(null, null, LocalDateTime.now().plusSeconds(1));
+		BaseEntity finalBaseEntity = baseEntityConverter.convertUpdate(baseEntity, baseEntityToUpdate);
+		assertThat(finalBaseEntity.getId()).isEqualTo(baseEntity.getId());
+		assertThat(finalBaseEntity.getCreatedAt()).isEqualTo(baseEntity.getCreatedAt());
+		assertThat(finalBaseEntity.getUpdatedAt()).isNotEqualTo(baseEntity.getUpdatedAt());
 	}
 
 	@Test
-	void shouldBaseEntityImplHaveSameFieldsOfBaseDomainModelImpl() {
-		BaseEntityImpl baseEntityImpl = baseEntityImplConverter.convert(baseDomainModelImpl);
-		checkFields(baseEntityImpl, baseDomainModelImpl);
+	void shouldBaseEntityHaveSameFieldsOfBaseDomainModelImpl() {
+		BaseEntity baseEntity = baseEntityConverter.convert(baseDomainModelImpl);
+		checkFields(baseEntity, baseDomainModelImpl);
 	}
 
 	@Test
-	void shouldBaseDomainModelImplHaveSameFieldsOfBaseEntityImpl() {
-		BaseDomainModelImpl baseDomainModelImpl = baseEntityImplConverter.convert(baseEntityImpl);
-		checkFields(baseDomainModelImpl, baseEntityImpl);
+	void shouldBaseDomainModelImplHaveSameFieldsOfBaseEntity() {
+		BaseDomainModelImpl baseDomainModelImpl = baseEntityConverter.convert(baseEntity);
+		checkFields(baseDomainModelImpl, baseEntity);
 	}
 
 	@Test
-	void shouldBaseEntityImplListHaveSameFieldsOfBaseDomainModelImplList() {
-		List<BaseEntityImpl> baseEntityImplList = baseEntityImplConverter.convertDomainList(baseDomainModelImplList);
-		for (int i = 0; i < baseEntityImplList.size(); i++) {
-			checkFields(baseEntityImplList.get(i), baseDomainModelImplList.get(i));
+	void shouldBaseEntityListHaveSameFieldsOfBaseDomainModelImplList() {
+		List<BaseEntity> baseEntityList = baseEntityConverter.convertDomainList(baseDomainModelImplList);
+		for (int i = 0; i < baseEntityList.size(); i++) {
+			checkFields(baseEntityList.get(i), baseDomainModelImplList.get(i));
 		}
 	}
 
 	@Test
-	void shouldBaseDomainModelImplListHaveSameFieldsOfBaseEntityImplList() {
-		List<BaseDomainModelImpl> baseDomainModelImplList = baseEntityImplConverter
-				.convertEntityList(baseEntityImplList);
+	void shouldBaseDomainModelImplListHaveSameFieldsOfBaseEntityList() {
+		List<BaseDomainModelImpl> baseDomainModelImplList = baseEntityConverter
+				.convertEntityList(baseEntityList);
 		for (int i = 0; i < baseDomainModelImplList.size(); i++) {
-			checkFields(baseDomainModelImplList.get(i), baseEntityImplList.get(i));
+			checkFields(baseDomainModelImplList.get(i), baseEntityList.get(i));
 		}
 	}
 
-	private void checkFields(BaseEntityImpl baseEntityImpl, BaseDomainModelImpl baseDomainModelImpl) {
-		assertThat(baseEntityImpl.getId()).isEqualTo(baseDomainModelImpl.getId());
-		assertThat(baseEntityImpl.getCreatedAt()).isEqualTo(baseDomainModelImpl.getCreatedAt());
-		assertThat(baseEntityImpl.getUpdatedAt()).isEqualTo(baseDomainModelImpl.getUpdatedAt());
+	private void checkFields(BaseEntity baseEntity, BaseDomainModelImpl baseDomainModelImpl) {
+		assertThat(baseEntity.getId()).isEqualTo(baseDomainModelImpl.getId());
+		assertThat(baseEntity.getCreatedAt()).isEqualTo(baseDomainModelImpl.getCreatedAt());
+		assertThat(baseEntity.getUpdatedAt()).isEqualTo(baseDomainModelImpl.getUpdatedAt());
 	}
 
-	private void checkFields(BaseDomainModelImpl baseDomainModelImpl, BaseEntityImpl baseEntityImpl) {
-		assertThat(baseDomainModelImpl.getId()).isEqualTo(baseEntityImpl.getId());
-		assertThat(baseDomainModelImpl.getCreatedAt()).isEqualTo(baseEntityImpl.getCreatedAt());
-		assertThat(baseDomainModelImpl.getUpdatedAt()).isEqualTo(baseEntityImpl.getUpdatedAt());
+	private void checkFields(BaseDomainModelImpl baseDomainModelImpl, BaseEntity baseEntity) {
+		assertThat(baseDomainModelImpl.getId()).isEqualTo(baseEntity.getId());
+		assertThat(baseDomainModelImpl.getCreatedAt()).isEqualTo(baseEntity.getCreatedAt());
+		assertThat(baseDomainModelImpl.getUpdatedAt()).isEqualTo(baseEntity.getUpdatedAt());
 	}
 }

@@ -18,73 +18,73 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import tech.swapy.generic_service.exceptions.IdNotFoundException;
 import tech.swapy.generic_service.impl.commons.BaseDomainModelImplTestCommons;
-import tech.swapy.generic_service.impl.commons.BaseEntityImplTestCommons;
+import tech.swapy.generic_service.impl.commons.BaseEntityTestCommons;
 import tech.swapy.generic_service.impl.domain.BaseDomainModelImpl;
-import tech.swapy.generic_service.impl.persistence.BaseEntityImpl;
 import tech.swapy.generic_service.persistence.BaseEntityConverter;
 import tech.swapy.generic_service.persistence.BaseRepository;
 import tech.swapy.generic_service.persistence.spring_data.BaseSpringDataRepository;
+import tech.swapy.generic_service.persistency.BaseEntity;
 
 @ExtendWith(MockitoExtension.class)
-class BaseEntityImplRepostioryImplTests {
+class BaseEntityRepostioryImplTests {
 
-	private BaseEntityImpl baseEntityImplX;
-	private BaseEntityImpl baseEntityImplY;
+	private BaseEntity baseEntityX;
+	private BaseEntity baseEntityY;
 	private BaseDomainModelImpl baseDomainModelImplX;
 	private BaseDomainModelImpl baseDomainModelImplY;
-	private Optional<BaseEntityImpl> optionalBaseEntityImpl;
-	private List<BaseEntityImpl> baseEntityImplList;
+	private Optional<BaseEntity> optionalBaseEntity;
+	private List<BaseEntity> baseEntityList;
 	private List<BaseDomainModelImpl> baseDomainModelImplList;
 
-	private BaseRepository<BaseEntityImpl, BaseDomainModelImpl, Long> baseEntityImplRepository;
+	private BaseRepository<BaseEntity, BaseDomainModelImpl, Long> baseEntityRepository;
 
 	@Mock
-	private BaseEntityConverter<BaseEntityImpl, BaseDomainModelImpl> baseEntityConverter;
+	private BaseEntityConverter<BaseEntity, BaseDomainModelImpl> baseEntityConverter;
 	@Mock
-	private BaseSpringDataRepository<BaseEntityImpl, Long> baseModelImplSpringDataRepository;
+	private BaseSpringDataRepository<BaseEntity, Long> baseModelImplSpringDataRepository;
 
 	@BeforeEach
 	void init() {
-		baseEntityImplRepository = new BaseEntityImplRepositoryImpl(baseModelImplSpringDataRepository,
+		baseEntityRepository = new BaseEntityRepositoryImpl(baseModelImplSpringDataRepository,
 				baseEntityConverter);
-		baseEntityImplX = BaseEntityImplTestCommons.createBaseEntityImpl();
-		baseEntityImplY = BaseEntityImplTestCommons.cloneBaseEntityImpl(baseEntityImplX);
+		baseEntityX = BaseEntityTestCommons.createBaseEntity();
+		baseEntityY = BaseEntityTestCommons.cloneBaseEntity(baseEntityX);
 		baseDomainModelImplX = BaseDomainModelImplTestCommons.createBaseDomainModelImpl();
 		baseDomainModelImplY = BaseDomainModelImplTestCommons.cloneBaseDomainModelImpl(baseDomainModelImplX);
-		optionalBaseEntityImpl = Optional.of(baseEntityImplX);
-		baseEntityImplList = BaseEntityImplTestCommons.createBaseEntityListImpl();
+		optionalBaseEntity = Optional.of(baseEntityX);
+		baseEntityList = BaseEntityTestCommons.createBaseEntityListImpl();
 		baseDomainModelImplList = BaseDomainModelImplTestCommons.createBaseDomainModelListImpl();
 	}
 
 	@Test
 	void shouldSave() {
-		baseEntityImplY.setId(null);
+		baseEntityY.setId(null);
 		baseDomainModelImplY.setId(null);
-		lenient().when(baseEntityConverter.convert(baseDomainModelImplY)).thenReturn(baseEntityImplY);
-		lenient().when(baseModelImplSpringDataRepository.save(baseEntityImplY)).thenReturn(baseEntityImplX);
-		lenient().when(baseEntityConverter.convert(baseEntityImplX)).thenReturn(baseDomainModelImplX);
-		assertThat(baseEntityImplRepository.save(baseDomainModelImplY)).isEqualTo(baseDomainModelImplX);
+		lenient().when(baseEntityConverter.convert(baseDomainModelImplY)).thenReturn(baseEntityY);
+		lenient().when(baseModelImplSpringDataRepository.save(baseEntityY)).thenReturn(baseEntityX);
+		lenient().when(baseEntityConverter.convert(baseEntityX)).thenReturn(baseDomainModelImplX);
+		assertThat(baseEntityRepository.save(baseDomainModelImplY)).isEqualTo(baseDomainModelImplX);
 	}
 
 	@Test
 	void shouldFindAll() {
-		lenient().when(baseModelImplSpringDataRepository.findAll()).thenReturn(baseEntityImplList);
-		lenient().when(baseEntityConverter.convertEntityList(baseEntityImplList)).thenReturn(baseDomainModelImplList);
-		assertThat(baseEntityImplRepository.findAll()).isEqualTo(baseDomainModelImplList);
+		lenient().when(baseModelImplSpringDataRepository.findAll()).thenReturn(baseEntityList);
+		lenient().when(baseEntityConverter.convertEntityList(baseEntityList)).thenReturn(baseDomainModelImplList);
+		assertThat(baseEntityRepository.findAll()).isEqualTo(baseDomainModelImplList);
 	}
 
 	@Test
 	void shouldFindById() {
-		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(optionalBaseEntityImpl);
-		lenient().when(baseEntityConverter.convert(baseEntityImplX)).thenReturn(baseDomainModelImplX);
-		assertThat(baseEntityImplRepository.findById(1L)).isEqualTo(baseDomainModelImplX);
+		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(optionalBaseEntity);
+		lenient().when(baseEntityConverter.convert(baseEntityX)).thenReturn(baseDomainModelImplX);
+		assertThat(baseEntityRepository.findById(1L)).isEqualTo(baseDomainModelImplX);
 	}
 
 	@Test
 	void shouldNotFindById() {
 		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(Optional.ofNullable(null));
 		IdNotFoundException idNotFoundException = assertThrows(IdNotFoundException.class, () -> {
-			baseEntityImplRepository.findById(2L);
+			baseEntityRepository.findById(2L);
 		});
 		String expectedMessage = "findById";
 		assertEquals(expectedMessage, idNotFoundException.getMessage());
@@ -92,19 +92,19 @@ class BaseEntityImplRepostioryImplTests {
 
 	@Test
 	void shouldUpdateById() {
-		lenient().when(baseEntityConverter.convert(baseDomainModelImplX)).thenReturn(baseEntityImplX);
-		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(optionalBaseEntityImpl);
-		lenient().when(baseEntityConverter.convertUpdate(optionalBaseEntityImpl.get(), baseEntityImplX)).thenReturn(baseEntityImplX); 
-		lenient().when(baseModelImplSpringDataRepository.save(baseEntityImplX)).thenReturn(baseEntityImplX);
-		lenient().when(baseEntityConverter.convert(baseEntityImplX)).thenReturn(baseDomainModelImplX);
-		assertThat(baseEntityImplRepository.updateById(1L, baseDomainModelImplX)).isEqualTo(baseDomainModelImplX);
+		lenient().when(baseEntityConverter.convert(baseDomainModelImplX)).thenReturn(baseEntityX);
+		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(optionalBaseEntity);
+		lenient().when(baseEntityConverter.convertUpdate(optionalBaseEntity.get(), baseEntityX)).thenReturn(baseEntityX); 
+		lenient().when(baseModelImplSpringDataRepository.save(baseEntityX)).thenReturn(baseEntityX);
+		lenient().when(baseEntityConverter.convert(baseEntityX)).thenReturn(baseDomainModelImplX);
+		assertThat(baseEntityRepository.updateById(1L, baseDomainModelImplX)).isEqualTo(baseDomainModelImplX);
 	}
 
 	@Test
 	void shouldNotUpdateById() {
 		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(Optional.empty());
 		IdNotFoundException idNotFoundException = assertThrows(IdNotFoundException.class, () -> {
-			baseEntityImplRepository.updateById(2L, baseDomainModelImplX);
+			baseEntityRepository.updateById(2L, baseDomainModelImplX);
 		});
 		String expectedMessage = "updateById";
 		assertEquals(expectedMessage, idNotFoundException.getMessage());
@@ -113,6 +113,6 @@ class BaseEntityImplRepostioryImplTests {
 	@Test
 	void shouldDeleteById() {
 		doNothing().when(baseModelImplSpringDataRepository).deleteById(1L);
-		assertDoesNotThrow(() -> baseEntityImplRepository.deleteById(1L));
+		assertDoesNotThrow(() -> baseEntityRepository.deleteById(1L));
 	}
 }
