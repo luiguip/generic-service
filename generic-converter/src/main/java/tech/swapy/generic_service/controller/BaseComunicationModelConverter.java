@@ -1,4 +1,4 @@
-package tech.swapy.generic_service;
+package tech.swapy.generic_service.controller;
 
 import java.util.List;
 
