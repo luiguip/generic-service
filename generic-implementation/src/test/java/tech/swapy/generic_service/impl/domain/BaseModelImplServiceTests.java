@@ -17,7 +17,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import tech.swapy.generic_service.base.domain.BaseService;
+import tech.swapy.generic_service.domain.BaseService;
 import tech.swapy.generic_service.exceptions.IdNotFoundException;
 import tech.swapy.generic_service.impl.commons.BaseDomainModelImplTestCommons;
 import tech.swapy.generic_service.impl.persistence.BaseEntityImpl;

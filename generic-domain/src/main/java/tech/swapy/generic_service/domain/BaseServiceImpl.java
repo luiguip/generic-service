@@ -1,4 +1,4 @@
-package tech.swapy.generic_service.base.domain;
+package tech.swapy.generic_service.domain;
 
 import java.io.Serializable;
 import java.util.List;
