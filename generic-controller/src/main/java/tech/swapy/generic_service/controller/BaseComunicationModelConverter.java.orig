@@ -1,0 +1,20 @@
+package tech.swapy.generic_service.controller;
+
+import java.util.List;
+
+import tech.swapy.generic_service.domain.BaseDomainModel;
+
+public interface BaseComunicationModelConverter<T extends BaseComunicationModel, E extends BaseDomainModel>{
+<<<<<<< Updated upstream:generic-controller/src/main/java/tech/swapy/generic_service/controller/BaseComunicationModelConverter.java
+	public abstract E convert(T baseEntity);
+	public abstract E convertCreate(T baseEntity);
+	public abstract E convertUpdate(T baseEntity);
+=======
+	public abstract E convert(T baseComunicationModel);
+	public abstract E convertSave(T baseComunicationModel);
+	public abstract E convertUpdate(T baseComunicationModel);
+>>>>>>> Stashed changes:src/main/java/tech/swapy/abstract_service/base/controller/BaseComunicationModelConverter.java
+	public abstract T convert(E baseDomainModel);
+	public abstract List<E> convertComunicationModelList(List<T> baseComunicationModelList);
+	public abstract List<T> convertDomainList(List<E> baseDomainModelList);
+}

@@ -102,6 +102,7 @@ class BaseEntityRepostioryImplTests {
 
 	@Test
 	void shouldNotUpdateById() {
+		lenient().when(baseEntityConverter.convert(baseDomainModelImplX)).thenReturn(baseEntityX);
 		lenient().when(baseModelImplSpringDataRepository.findById(1L)).thenReturn(Optional.empty());
 		IdNotFoundException idNotFoundException = assertThrows(IdNotFoundException.class, () -> {
 			baseEntityRepository.updateById(2L, baseDomainModelImplX);

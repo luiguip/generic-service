@@ -6,15 +6,34 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+<<<<<<< Updated upstream:generic-implementation/src/main/java/tech/swapy/generic_service/impl/controller/BaseComunicationModelmplConverter.java
 import tech.swapy.generic_service.controller.BaseComunicationModelConverter;
 import tech.swapy.generic_service.impl.domain.BaseDomainModelImpl;
+=======
+import tech.swapy.abstract_service.base.controller.BaseComunicationModelConverter;
+import tech.swapy.abstract_service.base_model.domain.BaseDomainModelImpl;
+import tech.swapy.abstract_service.base_model.domain.BaseDomainModelImplBuilder;
+>>>>>>> Stashed changes:src/main/java/tech/swapy/abstract_service/base_model/controller/BaseComunicationModelmplConverter.java
 
 @Component
 public class BaseComunicationModelmplConverter
 		implements BaseComunicationModelConverter<BaseComunicationModelImpl, BaseDomainModelImpl> {
 
+	BaseDomainModelImplBuilder baseDomainModelImplBuilder = new BaseDomainModelImplBuilder();
+
 	@Override
 	public BaseDomainModelImpl convert(BaseComunicationModelImpl baseComunicationModelImpl) {
+		return new BaseDomainModelImpl(baseComunicationModelImpl.getId(), baseComunicationModelImpl.getCreatedAt(),
+				baseComunicationModelImpl.getUpdatedAt());
+	}
+	
+	@Override
+	public BaseDomainModelImpl convertSave(BaseComunicationModelImpl baseComunicationModelImpl) {
+		return new BaseDomainModelImplBuilder(new BaseDomainModelImpl()).create();
+	}
+	
+	@Override
+	public BaseDomainModelImpl convertUpdate(BaseComunicationModelImpl baseComunicationModelImpl) {
 		return new BaseDomainModelImpl(baseComunicationModelImpl.getId(), baseComunicationModelImpl.getCreatedAt(),
 				baseComunicationModelImpl.getUpdatedAt());
 	}
