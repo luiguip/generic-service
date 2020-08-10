@@ -9,8 +9,8 @@
 		<artifactId>generic-service</artifactId>
 		<version>0.1.2-SNAPSHOT</version>
 	</parent>
-	<artifactId>generic-implementation</artifactId>
-	<name>generic-implementation</name>
+	<artifactId>generic-converter</artifactId>
+	<name>generic-converter</name>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
@@ -18,26 +18,6 @@
 		<dependency>
 			<groupId>tech.swapy</groupId>
 			<artifactId>generic-models</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>tech.swapy</groupId>
-			<artifactId>generic-controller</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>tech.swapy</groupId>
-			<artifactId>generic-domain</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>tech.swapy</groupId>
-			<artifactId>generic-repository</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>tech.swapy</groupId>
-			<artifactId>generic-converter</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 	</dependencies>

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import tech.swapy.generic_service.base.domain.BaseService;
 import tech.swapy.generic_service.controller.BaseComunicationModel;
 import tech.swapy.generic_service.controller.BaseComunicationModelConverter;
 import tech.swapy.generic_service.domain.BaseDomainModel;
+import tech.swapy.generic_service.domain.BaseService;
 
 public abstract class BaseRestController<T extends BaseComunicationModel, E extends BaseDomainModel, ID extends Serializable> {
 

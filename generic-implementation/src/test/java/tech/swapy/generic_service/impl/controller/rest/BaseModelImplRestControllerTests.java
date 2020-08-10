@@ -14,9 +14,9 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import tech.swapy.generic_service.base.domain.BaseService;
 import tech.swapy.generic_service.controller.BaseComunicationModelConverter;
 import tech.swapy.generic_service.controller.rest.BaseRestController;
+import tech.swapy.generic_service.domain.BaseService;
 import tech.swapy.generic_service.exceptions.IdNotFoundException;
 import tech.swapy.generic_service.impl.commons.BaseComunicationModelImplTestCommons;
 import tech.swapy.generic_service.impl.commons.BaseDomainModelImplTestCommons;
