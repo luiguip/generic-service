@@ -58,5 +58,6 @@
 		<module>generic-implementation</module>
 		<module>generic-models</module>
 		<module>generic-converter</module>
+		<module>generic-client</module>
 	</modules>
 </project>
