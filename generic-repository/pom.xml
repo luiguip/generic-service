@@ -20,5 +20,10 @@
 			<artifactId>generic-models</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>tech.swapy</groupId>
+			<artifactId>generic-converter</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 	</dependencies>
 </project>
