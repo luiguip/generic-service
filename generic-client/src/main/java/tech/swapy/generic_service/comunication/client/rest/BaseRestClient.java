@@ -21,8 +21,8 @@ public class BaseRestClient<T extends BaseComunicationModel, E extends BaseDomai
 	@Autowired
 	private BaseComunicationModelConverter<T, E> baseComunicationModelConverter;
 
-	public BaseRestClient(WebClient webClient, Class<T> clazz) {
-		this.webClient = webClient;
+	public BaseRestClient(String url, Class<T> clazz) {
+		this.webClient = WebClient.builder().baseUrl(url).build();
 		this.clazz = clazz;
 	}
 
