@@ -14,13 +14,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import tech.swapy.generic_service.comunication.controller.rest.BaseRestController;
 import tech.swapy.generic_service.controller.BaseComunicationModelConverter;
-import tech.swapy.generic_service.controller.rest.BaseRestController;
 import tech.swapy.generic_service.domain.BaseService;
 import tech.swapy.generic_service.exceptions.IdNotFoundException;
 import tech.swapy.generic_service.impl.commons.BaseComunicationModelImplTestCommons;
 import tech.swapy.generic_service.impl.commons.BaseDomainModelImplTestCommons;
-import tech.swapy.generic_service.impl.controller.BaseComunicationModelImpl;
+import tech.swapy.generic_service.impl.comunication.BaseComunicationModelImpl;
+import tech.swapy.generic_service.impl.comunication.controller.rest.BaseModelImplRestController;
 import tech.swapy.generic_service.impl.domain.BaseDomainModelImpl;
 
 @ExtendWith(MockitoExtension.class)

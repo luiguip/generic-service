@@ -1,4 +1,4 @@
-package tech.swapy.generic_service.client.rest;
+package tech.swapy.generic_service.comunication.client.rest;
 
 import java.io.Serializable;
 import java.util.List;
@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import tech.swapy.generic_service.client.BaseClient;
+import tech.swapy.generic_service.comunication.client.BaseClient;
 import tech.swapy.generic_service.controller.BaseComunicationModel;
 import tech.swapy.generic_service.controller.BaseComunicationModelConverter;
 import tech.swapy.generic_service.domain.BaseDomainModel;

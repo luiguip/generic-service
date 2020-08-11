@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import tech.swapy.generic_service.controller.BaseComunicationModelConverter;
 import tech.swapy.generic_service.impl.commons.BaseComunicationModelImplTestCommons;
 import tech.swapy.generic_service.impl.commons.BaseDomainModelImplTestCommons;
+import tech.swapy.generic_service.impl.comunication.BaseComunicationModelImpl;
+import tech.swapy.generic_service.impl.comunication.BaseComunicationModelmplConverter;
 import tech.swapy.generic_service.impl.domain.BaseDomainModelImpl;
 
 class BaseComunicationModelImplConverterTests {

@@ -1,4 +1,4 @@
-package tech.swapy.generic_service.client;
+package tech.swapy.generic_service.comunication.client;
 
 import java.io.Serializable;
 import java.util.List;

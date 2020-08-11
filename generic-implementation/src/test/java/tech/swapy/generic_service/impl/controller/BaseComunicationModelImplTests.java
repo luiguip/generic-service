@@ -10,7 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import tech.swapy.generic_service.impl.commons.BaseComunicationModelImplTestCommons;
-import tech.swapy.generic_service.impl.controller.BaseComunicationModelImpl;
+import tech.swapy.generic_service.impl.comunication.BaseComunicationModelImpl;
 
 
 

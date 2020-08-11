@@ -1,4 +1,4 @@
-package tech.swapy.generic_service.controller;
+package tech.swapy.generic_service.comunication.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;

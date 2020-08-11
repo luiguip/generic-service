@@ -1,4 +1,4 @@
-package tech.swapy.generic_service.controller.rest;
+package tech.swapy.generic_service.comunication.controller.rest;
 
 import java.io.Serializable;
 import java.util.List;

@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
 
-import tech.swapy.generic_service.impl.controller.BaseComunicationModelImpl;
+import tech.swapy.generic_service.impl.comunication.BaseComunicationModelImpl;
 
 
 public class BaseComunicationModelImplTestCommons {
