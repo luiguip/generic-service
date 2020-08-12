@@ -1,4 +1,4 @@
-package tech.swapy.generic_service.impl.controller.rest;
+package tech.swapy.generic_service.impl.comunication.controller.rest;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;

@@ -1,4 +1,4 @@
-package tech.swapy.generic_service.impl.controller;
+package tech.swapy.generic_service.impl.comunication;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

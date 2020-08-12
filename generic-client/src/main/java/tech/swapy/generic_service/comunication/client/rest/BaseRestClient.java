@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import tech.swapy.generic_service.comunication.client.BaseClient;
@@ -21,8 +22,10 @@ public class BaseRestClient<T extends BaseComunicationModel, E extends BaseDomai
 	@Autowired
 	private BaseComunicationModelConverter<T, E> baseComunicationModelConverter;
 
-	public BaseRestClient(String url, Class<T> clazz) {
+	public BaseRestClient(String url, BaseComunicationModelConverter<T, E> baseComunicationModelConverter,
+			Class<T> clazz) {
 		this.webClient = WebClient.builder().baseUrl(url).build();
+		this.baseComunicationModelConverter = baseComunicationModelConverter;
 		this.clazz = clazz;
 	}
 
@@ -48,7 +51,8 @@ public class BaseRestClient<T extends BaseComunicationModel, E extends BaseDomai
 	@Override
 	public E findById(ID entityId) {
 		T responseBody = webClient.get()
-				.uri("{id}", entityId)
+				.uri("/{id}", entityId)
+				.accept(MediaType.APPLICATION_JSON)
 				.retrieve()
 				.bodyToMono(clazz)
 				.block();
@@ -57,8 +61,8 @@ public class BaseRestClient<T extends BaseComunicationModel, E extends BaseDomai
 
 	@Override
 	public E updateById(ID entityId, E domainModel) {
-		T responseBody = webClient.post()
-				.uri("{id}", entityId)
+		T responseBody = webClient.put()
+				.uri("/{id}", entityId)
 				.bodyValue(domainModel)
 				.retrieve()
 				.bodyToMono(clazz)
@@ -68,8 +72,8 @@ public class BaseRestClient<T extends BaseComunicationModel, E extends BaseDomai
 
 	@Override
 	public void deleteById(ID entityId) {
-		webClient.post()
-			.uri("{id}", entityId)
+		webClient.delete()
+			.uri("/{id}", entityId)
 			.retrieve()
 			.toBodilessEntity()
 			.block();

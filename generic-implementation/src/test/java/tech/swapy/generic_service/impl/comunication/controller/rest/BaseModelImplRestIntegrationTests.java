@@ -1,4 +1,4 @@
-package tech.swapy.generic_service.impl.controller.rest;
+package tech.swapy.generic_service.impl.comunication.controller.rest;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
