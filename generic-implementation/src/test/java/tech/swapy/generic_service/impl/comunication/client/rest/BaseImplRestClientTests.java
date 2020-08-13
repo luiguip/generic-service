@@ -5,7 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import java.io.IOException;
 import java.util.List;
 
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -26,15 +28,13 @@ import tech.swapy.generic_service.impl.domain.BaseDomainModelImpl;
 
 class BaseImplRestClientTests {
 
-	@Mock
 	private BaseComunicationModelConverter<BaseComunicationModelImpl, BaseDomainModelImpl> baseComunicationModelConverter = new BaseComunicationModelmplConverter();
-
-	@Mock
 	private WebClient webClient;
 	private BaseImplRestClient baseImplRestClient;
 
-	private MockWebServer mockBackEnd;
-	private ObjectMapper objectMapper;
+	static private MockWebServer mockBackEnd;
+	static private ObjectMapper objectMapper;
+	
 	private BaseComunicationModelImpl baseComunicationModelImplX;
 	private BaseComunicationModelImpl baseComunicationModelImplY;
 	private List<BaseComunicationModelImpl> baseComunicationModelImplList;
@@ -42,17 +42,22 @@ class BaseImplRestClientTests {
 	private BaseDomainModelImpl baseDomainModelImplY;
 	private List<BaseDomainModelImpl> baseDomainModelImplList;
 
-	@AfterEach
-	void tearDown() throws IOException {
+	@BeforeAll
+	static void initAll() throws IOException {
+		mockBackEnd = new MockWebServer();
+		mockBackEnd.start();
+		objectMapper = new ObjectMapper();
+		objectMapper.registerModule(new JavaTimeModule());
+	}
+
+	@AfterAll
+	static void tearDown() throws IOException {
 		mockBackEnd.shutdown();
 	}
 
 	@BeforeEach
 	void init() throws IOException {
-		mockBackEnd = new MockWebServer();
-		mockBackEnd.start();
-		objectMapper = new ObjectMapper();
-		objectMapper.registerModule(new JavaTimeModule());
+
 		String baseUrl = String.format("http://localhost:%s/base", mockBackEnd.getPort());
 		baseImplRestClient = new BaseImplRestClient(baseUrl, baseComunicationModelConverter,
 				BaseComunicationModelImpl.class);
@@ -61,7 +66,9 @@ class BaseImplRestClientTests {
 		baseComunicationModelImplY = BaseComunicationModelImplTestCommons
 				.cloneBaseComunicationModelImpl(baseComunicationModelImplX);
 		baseComunicationModelImplList = BaseComunicationModelImplTestCommons.createBaseComunicationModelImplListl();
-		baseDomainModelImplX = BaseDomainModelImplTestCommons.createBaseDomainModelImpl();
+
+		baseDomainModelImplX = new BaseDomainModelImpl(baseComunicationModelImplX.getId(),
+				baseComunicationModelImplX.getCreatedAt(), baseComunicationModelImplX.getUpdatedAt());
 		baseDomainModelImplY = BaseDomainModelImplTestCommons.cloneBaseDomainModelImpl(baseDomainModelImplX);
 		baseDomainModelImplList = BaseDomainModelImplTestCommons.createBaseDomainModelListImpl();
 	}
@@ -71,7 +78,7 @@ class BaseImplRestClientTests {
 		mockBackEnd.enqueue(new MockResponse().setBody(objectMapper.writeValueAsString(baseComunicationModelImplX))
 				.addHeader("Content-Type", "application/json"));
 		BaseDomainModelImpl baseDomainModelRetrieved = baseImplRestClient.findById(baseComunicationModelImplX.getId());
-		assertThat(baseDomainModelRetrieved).isEqualTo(baseDomainModelImplX);
+		assertThat(baseDomainModelRetrieved.getId()).isEqualTo(baseDomainModelImplX.getId());
 	}
 
 }
