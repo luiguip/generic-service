@@ -3,6 +3,7 @@ package tech.swapy.generic_service.impl.comunication.client.rest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
@@ -88,5 +89,16 @@ class BaseImplRestClientTests {
 		baseDomainModelImplX.setId(null);
 		BaseDomainModelImpl baseDomainModelRetrieved = baseImplRestClient.save(baseDomainModelImplX);
 		assertThat(baseDomainModelRetrieved).isEqualTo(baseDomainModelImplY);
+	}
+	
+	@Test
+	void shouldUpdateBaseComunicationModel() throws JsonProcessingException {
+		baseComunicationModelImplX.setUpdatedAt(LocalDateTime.now().plusSeconds(1));
+		mockBackEnd.enqueue(new MockResponse().setBody(objectMapper.writeValueAsString(baseComunicationModelImplX))
+				.addHeader("Content-Type", "application/json"));
+		BaseDomainModelImpl baseDomainModelRetrieved = baseImplRestClient.updateById(baseDomainModelImplX.getId(), baseDomainModelImplX);
+		assertThat(baseDomainModelRetrieved.getId()).isEqualTo(baseDomainModelImplX.getId());
+		assertThat(baseDomainModelRetrieved.getCreatedAt()).isEqualTo(baseDomainModelImplX.getCreatedAt());
+		assertThat(baseDomainModelRetrieved.getUpdatedAt()).isNotEqualTo(baseComunicationModelImplX.getCreatedAt());
 	}
 }
