@@ -78,7 +78,7 @@ class BaseImplRestClientTests {
 		mockBackEnd.enqueue(new MockResponse().setBody(objectMapper.writeValueAsString(baseComunicationModelImplX))
 				.addHeader("Content-Type", "application/json"));
 		BaseDomainModelImpl baseDomainModelRetrieved = baseImplRestClient.findById(baseComunicationModelImplX.getId());
-		assertThat(baseDomainModelRetrieved.getId()).isEqualTo(baseDomainModelImplX.getId());
+		assertThat(baseDomainModelRetrieved).isEqualTo(baseDomainModelImplX);
 	}
 
 }
