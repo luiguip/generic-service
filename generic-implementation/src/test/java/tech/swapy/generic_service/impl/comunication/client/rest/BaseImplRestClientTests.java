@@ -81,4 +81,12 @@ class BaseImplRestClientTests {
 		assertThat(baseDomainModelRetrieved).isEqualTo(baseDomainModelImplX);
 	}
 
+	@Test
+	void shouldSaveBaseComunicationModel() throws JsonProcessingException {
+		mockBackEnd.enqueue(new MockResponse().setBody(objectMapper.writeValueAsString(baseComunicationModelImplX))
+				.addHeader("Content-Type", "application/json"));
+		baseDomainModelImplX.setId(null);
+		BaseDomainModelImpl baseDomainModelRetrieved = baseImplRestClient.save(baseDomainModelImplX);
+		assertThat(baseDomainModelRetrieved).isEqualTo(baseDomainModelImplY);
+	}
 }
